@@ -28,15 +28,18 @@
 #include "bricklib2/hal/system_timer/system_timer.h"
 #include "bricklib2/logging/logging.h"
 #include "communication.h"
+#include "pcal6416a.h"
 
 int main(void) {
 	logging_init();
 	logd("Start IO16 V2 Bricklet\n\r");
 
 	communication_init();
+	pcal6416a_init();
 
 	while(true) {
 		bootloader_tick();
 		communication_tick();
+		pcal6416a_tick();
 	}
 }
