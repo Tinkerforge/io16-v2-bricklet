@@ -28,9 +28,7 @@
 
 PCAL6416A pcal6416a;
 
-void pcal6416a_init(void) {
-	memset(&pcal6416a, 0, sizeof(PCAL6416A));
-
+void pcal6416a_init_i2c(void) {
 	pcal6416a.i2c_fifo.baudrate         = PCAL6416A_I2C_BAUDRATE;
 	pcal6416a.i2c_fifo.address          = PCAL6416A_I2C_ADDRESS;
 	pcal6416a.i2c_fifo.i2c              = PCAL6416A_I2C;
@@ -53,6 +51,18 @@ void pcal6416a_init(void) {
 
 	i2c_fifo_init(&pcal6416a.i2c_fifo);
 
+	// Make sure that values are written again if I2C is reset.
+	// On the initial init these values will be overwritten again.
+	pcal6416a.last_inout         = ~pcal6416a.inout;
+	pcal6416a.last_output_value  = ~pcal6416a.output_value;
+	pcal6416a.last_pullup_enable = ~pcal6416a.pullup_enable;
+}
+
+void pcal6416a_init(void) {
+	memset(&pcal6416a, 0, sizeof(PCAL6416A));
+
+	pcal6416a_init_i2c();
+
 	const XMC_GPIO_CONFIG_t input_pin_config = {
 		.mode             = XMC_GPIO_MODE_INPUT_INVERTED_TRISTATE,
 		.input_hysteresis = XMC_GPIO_INPUT_HYSTERESIS_STANDARD,
@@ -69,8 +79,7 @@ void pcal6416a_init(void) {
     XMC_GPIO_SetOutputHigh(PCAL6416A_NRESET_PIN);
     system_timer_sleep_ms(2);
 
-//    pcal6416a.inout = 0xFFFF;
-    pcal6416a.inout = 0x0000; pcal6416a.last_inout = 0xFFFF;
+    pcal6416a.inout = 0xFFFF;
     pcal6416a.pullup_enable = 0xFFFF;
     pcal6416a.output_value = 0x0000; pcal6416a.last_output_value = 0xFFFF;
 }
@@ -80,7 +89,7 @@ void pcal6416a_tick(void) {
 
 	if(state & I2C_FIFO_STATE_ERROR) {
         loge("PCAL6416A I2C error: %d (%d)\n\r", state, pcal6416a.i2c_fifo.i2c_status);
-        pcal6416a_init();
+        pcal6416a_init_i2c();
         return;
 	}
 
@@ -93,7 +102,7 @@ void pcal6416a_tick(void) {
 				case PCAL6416A_STATE_READ_INPUT_VALUE: {
 					if(length != 2) {
 						loge("PCAL6416A unexpected I2C read length: %d\n\r", length);
-						pcal6416a_init();
+						pcal6416a_init_i2c();
 						return;
 					}
 
@@ -127,7 +136,7 @@ void pcal6416a_tick(void) {
 			// If we end up in a ready state that we don't handle, something went wrong
 			if(state & I2C_FIFO_STATE_READY) {
 				loge("PCAL6416A unrecognized I2C ready state: %d\n\r", state);
-				pcal6416a_init();
+				pcal6416a_init_i2c();
 			}
 
 			return;
