@@ -75,15 +75,8 @@ void pcal6416a_init(void) {
     pcal6416a.output_value = 0x0000; pcal6416a.last_output_value = 0xFFFF;
 }
 
-uint32_t tmp = 0;
 void pcal6416a_tick(void) {
-    if(system_timer_is_time_elapsed_ms(tmp, 250)) {
-        pcal6416a.output_value += 1;
-        tmp = system_timer_get_ms();
-        uartbb_printf("value: %b\n\r", pcal6416a.input_value);
-    }
 	I2CFifoState state = i2c_fifo_next_state(&pcal6416a.i2c_fifo);
-//    uartbb_printf("state: (%b) %d\n\r", pcal6416a.input_value, state);
 
 	if(state & I2C_FIFO_STATE_ERROR) {
         loge("PCAL6416A I2C error: %d (%d)\n\r", state, pcal6416a.i2c_fifo.i2c_status);
