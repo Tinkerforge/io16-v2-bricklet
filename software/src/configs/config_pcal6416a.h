@@ -25,7 +25,7 @@
 #include "xmc_i2c.h"
 #include "xmc_gpio.h"
 
-#define PCAL6416A_I2C_BAUDRATE         100000
+#define PCAL6416A_I2C_BAUDRATE         400000
 
 #define PCAL6416A_I2C_ADDRESS          0b0100000
 #define PCAL6416A_I2C                  XMC_I2C0_CH1
