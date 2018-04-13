@@ -464,11 +464,11 @@ bool handle_all_input_value_callback(void) {
 
 		ringbuffer_get(&io16.all_input_value_cb.cb_rb, &rb_get_tmp_0);
 		ringbuffer_get(&io16.all_input_value_cb.cb_rb, &rb_get_tmp_1);
-		cb.changed = (rb_get_tmp_0 << 8) | rb_get_tmp_1;
+		cb.changed = (rb_get_tmp_1 << 8) | rb_get_tmp_0;
 
 		ringbuffer_get(&io16.all_input_value_cb.cb_rb, &rb_get_tmp_0);
 		ringbuffer_get(&io16.all_input_value_cb.cb_rb, &rb_get_tmp_1);
-		cb.value = (rb_get_tmp_0 << 8) | rb_get_tmp_1;
+		cb.value = (rb_get_tmp_1 << 8) | rb_get_tmp_0;
 	}
 
 	if(bootloader_spitfp_is_send_possible(&bootloader_status.st)) {

@@ -154,15 +154,7 @@ void io16_tick(void) {
 						all_channel_changed[0] |= (1 << i);
 					}
 					else {
-						all_channel_changed[1] |= (1 << i);
-					}
-				}
-				else {
-					if(i < 8) {
-						all_channel_changed[0] &= ~(1 << i);
-					}
-					else {
-						all_channel_changed[1] &= ~(1 << i);
+						all_channel_changed[1] |= (1 << (i - 8));
 					}
 				}
 
@@ -171,7 +163,7 @@ void io16_tick(void) {
 						all_channel_values[0] |= (1 << i);
 					}
 					else {
-						all_channel_values[1] |= (1 << i);
+						all_channel_values[1] |= (1 << (i - 8));
 					}
 				}
 				else {
@@ -179,7 +171,7 @@ void io16_tick(void) {
 						all_channel_values[0] &= ~(1 << i);
 					}
 					else {
-						all_channel_values[1] &= ~(1 << i);
+						all_channel_values[1] &= ~(1 << (i - 8));
 					}
 				}
 
