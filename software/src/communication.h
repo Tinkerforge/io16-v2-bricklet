@@ -1,5 +1,6 @@
 /* io16-v2-bricklet
  * Copyright (C) 2018 Olaf Lüke <olaf@tinkerforge.com>
+ * Copyright (C) 2018 Ishraq Ibne Ashraf <ishraq@tinkerforge.com>
  *
  * communication.h: TFP protocol message handling
  *
@@ -82,7 +83,7 @@ void communication_init(void);
 
 typedef struct {
 	TFPMessageHeader header;
-	bool value[16];
+	uint16_t value;
 } __attribute__((__packed__)) SetValue;
 
 typedef struct {
@@ -91,7 +92,7 @@ typedef struct {
 
 typedef struct {
 	TFPMessageHeader header;
-	bool value[16];
+	uint16_t value;
 } __attribute__((__packed__)) GetValue_Response;
 
 typedef struct {
@@ -219,8 +220,8 @@ typedef struct {
 
 typedef struct {
 	TFPMessageHeader header;
-	bool changed[16];
-	bool value[16];
+	uint16_t changed;
+	uint16_t value;
 } __attribute__((__packed__)) AllInputValue_Callback;
 
 typedef struct {
@@ -228,7 +229,6 @@ typedef struct {
 	uint8_t channel;
 	bool value;
 } __attribute__((__packed__)) MonoflopDone_Callback;
-
 
 // Function prototypes
 BootloaderHandleMessageResponse set_value(const SetValue *data);
@@ -258,6 +258,5 @@ bool handle_monoflop_done_callback(void);
 	handle_input_value_callback, \
 	handle_all_input_value_callback, \
 	handle_monoflop_done_callback, \
-
 
 #endif

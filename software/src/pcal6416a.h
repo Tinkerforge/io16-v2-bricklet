@@ -27,29 +27,29 @@
 
 #include "bricklib2/hal/i2c_fifo/i2c_fifo.h"
 typedef enum {
-    PCAL6416A_STATE_IDLE,
-    PCAL6416A_STATE_READ_INPUT_VALUE,
-    PCAL6416A_STATE_WRITE_INOUT,
-    PCAL6416A_STATE_WRITE_PULLUP_ENABLE,
-    PCAL6416A_STATE_WRITE_OUTPUT_VALUE,
+	PCAL6416A_STATE_IDLE,
+	PCAL6416A_STATE_READ_INPUT_VALUE,
+	PCAL6416A_STATE_WRITE_INOUT,
+	PCAL6416A_STATE_WRITE_PULLUP_ENABLE,
+	PCAL6416A_STATE_WRITE_OUTPUT_VALUE,
 } PCAL6416AState;
 
 typedef struct {
-    uint16_t input_value; // 1 = high, 0 = low, input and output
-    uint16_t inout; // 1 = input, 0 = output
-    uint16_t pullup_enable; // 1 = enable
-    uint16_t output_value; // 1 = high, 0 = low
+	uint16_t input_value; // 1 = high, 0 = low, input and output
+	uint16_t inout; // 1 = input, 0 = output
+	uint16_t pullup_enable; // 1 = enable
+	uint16_t output_value; // 1 = high, 0 = low
 
-    uint16_t last_inout;
-    uint16_t last_pullup_enable;
-    uint16_t last_output_value;
+	uint16_t last_inout;
+	uint16_t last_pullup_enable;
+	uint16_t last_output_value;
 
-    uint16_t set_inout;
-    uint16_t set_pullup_enable;
-    uint16_t set_output_value;
+	uint16_t set_inout;
+	uint16_t set_pullup_enable;
+	uint16_t set_output_value;
 
-    I2CFifo i2c_fifo;
-    PCAL6416AState state;
+	I2CFifo i2c_fifo;
+	PCAL6416AState state;
 } PCAL6416A;
 
 extern PCAL6416A pcal6416a;

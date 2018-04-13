@@ -70,30 +70,31 @@ void pcal6416a_init(void) {
 
 	const XMC_GPIO_CONFIG_t low_pin_config = {
 		.mode             = XMC_GPIO_MODE_OUTPUT_PUSH_PULL,
-        .output_level     = XMC_GPIO_OUTPUT_LEVEL_HIGH,
+		.output_level     = XMC_GPIO_OUTPUT_LEVEL_HIGH,
 	};
 
 	XMC_GPIO_Init(PCAL6416A_INT_PIN, &input_pin_config);
 	XMC_GPIO_Init(PCAL6416A_NRESET_PIN, &low_pin_config);
-    system_timer_sleep_ms(2);
-    XMC_GPIO_SetOutputHigh(PCAL6416A_NRESET_PIN);
-    system_timer_sleep_ms(2);
+	system_timer_sleep_ms(2);
+	XMC_GPIO_SetOutputHigh(PCAL6416A_NRESET_PIN);
+	system_timer_sleep_ms(2);
 
-    pcal6416a.inout = 0xFFFF;
-    pcal6416a.pullup_enable = 0xFFFF;
-    pcal6416a.output_value = 0x0000; pcal6416a.last_output_value = 0xFFFF;
+	pcal6416a.inout = 0xFFFF;
+	pcal6416a.pullup_enable = 0xFFFF;
+	pcal6416a.output_value = 0x0000;
+	pcal6416a.last_output_value = 0xFFFF;
 }
 
 void pcal6416a_tick(void) {
 	I2CFifoState state = i2c_fifo_next_state(&pcal6416a.i2c_fifo);
 
 	if(state & I2C_FIFO_STATE_ERROR) {
-        loge("PCAL6416A I2C error: %d (%d)\n\r", state, pcal6416a.i2c_fifo.i2c_status);
-        pcal6416a_init_i2c();
-        return;
+		loge("PCAL6416A I2C error: %d (%d)\n\r", state, pcal6416a.i2c_fifo.i2c_status);
+		pcal6416a_init_i2c();
+		return;
 	}
 
-    switch(state) {
+	switch(state) {
 		case I2C_FIFO_STATE_READ_REGISTER_READY: {
 			uint8_t data[16];
 			uint8_t length = i2c_fifo_read_fifo(&pcal6416a.i2c_fifo, data, 16);
@@ -103,32 +104,55 @@ void pcal6416a_tick(void) {
 					if(length != 2) {
 						loge("PCAL6416A unexpected I2C read length: %d\n\r", length);
 						pcal6416a_init_i2c();
+
 						return;
 					}
 
-                    pcal6416a.input_value = data[1] | (data[0] << 8);
+					pcal6416a.input_value = data[1] | (data[0] << 8);
 					pcal6416a.state = PCAL6416A_STATE_IDLE; 
+
 					break;
 				}
 
-				default: pcal6416a.state = PCAL6416A_STATE_IDLE; break;
+				default:
+					pcal6416a.state = PCAL6416A_STATE_IDLE;
+
+					break;
 			}
 
-            break;
-        }
+			break;
+		}
 
-        case I2C_FIFO_STATE_WRITE_REGISTER_READY: {
-            switch(pcal6416a.state) {
-				case PCAL6416A_STATE_WRITE_INOUT:         pcal6416a.state = PCAL6416A_STATE_IDLE; pcal6416a.last_inout = pcal6416a.set_inout; break;
-				case PCAL6416A_STATE_WRITE_PULLUP_ENABLE: pcal6416a.state = PCAL6416A_STATE_IDLE; pcal6416a.last_pullup_enable = pcal6416a.set_pullup_enable; break;
-				case PCAL6416A_STATE_WRITE_OUTPUT_VALUE:  pcal6416a.state = PCAL6416A_STATE_IDLE; pcal6416a.last_output_value = pcal6416a.set_output_value; break;
-				default:                                  pcal6416a.state = PCAL6416A_STATE_IDLE; break;
+		case I2C_FIFO_STATE_WRITE_REGISTER_READY: {
+			switch(pcal6416a.state) {
+				case PCAL6416A_STATE_WRITE_INOUT:
+					pcal6416a.state = PCAL6416A_STATE_IDLE;
+					pcal6416a.last_inout = pcal6416a.set_inout;
+
+					break;
+
+				case PCAL6416A_STATE_WRITE_PULLUP_ENABLE:
+					pcal6416a.state = PCAL6416A_STATE_IDLE;
+					pcal6416a.last_pullup_enable = pcal6416a.set_pullup_enable;
+
+					break;
+
+				case PCAL6416A_STATE_WRITE_OUTPUT_VALUE:
+					pcal6416a.state = PCAL6416A_STATE_IDLE;
+					pcal6416a.last_output_value = pcal6416a.set_output_value;
+
+					break;
+
+				default:
+					pcal6416a.state = PCAL6416A_STATE_IDLE;
+
+					break;
 			}
 
-            break;
-        }
+			break;
+		}
 
-        case I2C_FIFO_STATE_IDLE: {
+		case I2C_FIFO_STATE_IDLE: {
 			break; // Handled below
 		}
 
@@ -143,29 +167,32 @@ void pcal6416a_tick(void) {
 		}
 	}
 
-    if((state == I2C_FIFO_STATE_IDLE || (state & I2C_FIFO_STATE_READY) != 0)) {
-        if(pcal6416a.inout != pcal6416a.last_inout) {
-            uint8_t data[2] = {(pcal6416a.inout) >> 8 & 0xFF, pcal6416a.inout & 0xFF};
-            i2c_fifo_write_register(&pcal6416a.i2c_fifo, PCAL6416A_REG_CONFIGURATION, 2, data, true);
+	if((state == I2C_FIFO_STATE_IDLE || (state & I2C_FIFO_STATE_READY) != 0)) {
+		if(pcal6416a.inout != pcal6416a.last_inout) {
+			uint8_t data[2] = {(pcal6416a.inout) >> 8 & 0xFF, pcal6416a.inout & 0xFF};
+			i2c_fifo_write_register(&pcal6416a.i2c_fifo, PCAL6416A_REG_CONFIGURATION, 2, data, true);
 
-            pcal6416a.set_inout = pcal6416a.inout;
-            pcal6416a.state = PCAL6416A_STATE_WRITE_INOUT;
-        } else if(pcal6416a.pullup_enable != pcal6416a.last_pullup_enable) {
-            uint8_t data[2] = {(pcal6416a.pullup_enable) >> 8 & 0xFF, pcal6416a.pullup_enable & 0xFF};
-            i2c_fifo_write_register(&pcal6416a.i2c_fifo, PCAL6416A_REG_PULLUP_ENABLE, 2, data, true);
+			pcal6416a.set_inout = pcal6416a.inout;
+			pcal6416a.state = PCAL6416A_STATE_WRITE_INOUT;
+		}
+		else if(pcal6416a.pullup_enable != pcal6416a.last_pullup_enable) {
+			uint8_t data[2] = {(pcal6416a.pullup_enable) >> 8 & 0xFF, pcal6416a.pullup_enable & 0xFF};
+			i2c_fifo_write_register(&pcal6416a.i2c_fifo, PCAL6416A_REG_PULLUP_ENABLE, 2, data, true);
 
-            pcal6416a.set_pullup_enable = pcal6416a.pullup_enable;
-            pcal6416a.state = PCAL6416A_STATE_WRITE_PULLUP_ENABLE;
-        } else if(pcal6416a.output_value != pcal6416a.last_output_value) {
-            uint8_t data[2] = {(pcal6416a.output_value) >> 8 & 0xFF, pcal6416a.output_value & 0xFF};
-            i2c_fifo_write_register(&pcal6416a.i2c_fifo, PCAL6416A_REG_OUTPUT_PORT, 2, data, true);
+			pcal6416a.set_pullup_enable = pcal6416a.pullup_enable;
+			pcal6416a.state = PCAL6416A_STATE_WRITE_PULLUP_ENABLE;
+		}
+		else if(pcal6416a.output_value != pcal6416a.last_output_value) {
+			uint8_t data[2] = {(pcal6416a.output_value) >> 8 & 0xFF, pcal6416a.output_value & 0xFF};
+			i2c_fifo_write_register(&pcal6416a.i2c_fifo, PCAL6416A_REG_OUTPUT_PORT, 2, data, true);
 
-            pcal6416a.set_output_value = pcal6416a.output_value;
-            pcal6416a.state = PCAL6416A_STATE_WRITE_OUTPUT_VALUE;
-        }else {
-            i2c_fifo_read_register(&pcal6416a.i2c_fifo, PCAL6416A_REG_INPUT_PORT, 2);
+			pcal6416a.set_output_value = pcal6416a.output_value;
+			pcal6416a.state = PCAL6416A_STATE_WRITE_OUTPUT_VALUE;
+		}
+		else {
+			i2c_fifo_read_register(&pcal6416a.i2c_fifo, PCAL6416A_REG_INPUT_PORT, 2);
 
-            pcal6416a.state = PCAL6416A_STATE_READ_INPUT_VALUE;
-        }
-    }
+			pcal6416a.state = PCAL6416A_STATE_READ_INPUT_VALUE;
+		}
+	}
 }

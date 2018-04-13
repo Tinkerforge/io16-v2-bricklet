@@ -1,5 +1,6 @@
 /* io16-v2-bricklet
  * Copyright (C) 2018 Olaf Lüke <olaf@tinkerforge.com>
+ * Copyright (C) 2018 Ishraq Ibne Ashraf <ishraq@tinkerforge.com>
  *
  * main.c: Initialization for IO16 V2 Bricklet
  *
@@ -25,10 +26,11 @@
 #include "configs/config.h"
 
 #include "bricklib2/bootloader/bootloader.h"
-#include "bricklib2/hal/system_timer/system_timer.h"
 #include "bricklib2/logging/logging.h"
+
 #include "communication.h"
 #include "pcal6416a.h"
+#include "io16.h"
 
 int main(void) {
 	logging_init();
@@ -36,10 +38,12 @@ int main(void) {
 
 	communication_init();
 	pcal6416a_init();
+	io16_init();
 
 	while(true) {
 		bootloader_tick();
 		communication_tick();
 		pcal6416a_tick();
+		io16_tick();
 	}
 }
