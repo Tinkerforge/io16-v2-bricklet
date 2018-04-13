@@ -80,7 +80,11 @@ void pcal6416a_init(void) {
 	system_timer_sleep_ms(2);
 
 	pcal6416a.inout = 0xFFFF;
+	pcal6416a.last_inout = 0x0000;
+
 	pcal6416a.pullup_enable = 0xFFFF;
+	pcal6416a.last_pullup_enable= 0x0000;
+
 	pcal6416a.output_value = 0x0000;
 	pcal6416a.last_output_value = 0xFFFF;
 }
