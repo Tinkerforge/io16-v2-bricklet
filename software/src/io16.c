@@ -40,43 +40,48 @@ void io16_init(void) {
 
 	pcal6416a_tick();
 
+	memset(&io16, 0, sizeof(IO16));
+
 	// Initialise all the channels
+	// The commented out code is already initialized by the memset above (we need to save the flash space).
 	for(uint8_t i = 0; i < NUMBER_OF_CHANNELS; i++) {
+		IO_CH_t *channel = &io16.channels[i];
+
 		// Update current channel value
-		(pcal6416a.input_value & (1 << i)) ? (io16.channels[i].value = true) : (io16.channels[i].value = false);
+		channel->value = pcal6416a.input_value & (1 << i);
 
 		// Generic channel config
-		io16.channels[i].direction = IO16_V2_DIRECTION_IN;
+		channel->direction = IO16_V2_DIRECTION_IN;
 
 		// Channel monoflop config
-		io16.channels[i].monoflop.time = 0;
-		io16.channels[i].monoflop.time_start = 0;
-		io16.channels[i].monoflop.time_remaining = 0;
+//		channel->monoflop.time = 0;
+//		channel->monoflop.time_start = 0;
+//		channel->monoflop.time_remaining = 0;
 
 		// Channel edge count config
-		io16.channels[i].edge_count.debounce = 100;
-		io16.channels[i].edge_count.cnt_edge_rising = 0;
-		io16.channels[i].edge_count.cnt_edge_falling = 0;
-		io16.channels[i].edge_count.edge_type = IO16_V2_EDGE_TYPE_RISING;
+		channel->edge_count.debounce = 100;
+//		channel->edge_count.cnt_edge_rising = 0;
+//		channel->edge_count.cnt_edge_falling = 0;
+//		channel->edge_count.edge_type = IO16_V2_EDGE_TYPE_RISING;
 
 		// Channel input value callback config
-		io16.channels[i].input_value_cb.period = 0;
-		io16.channels[i].input_value_cb.last_value = false;
-		io16.channels[i].input_value_cb.period_start = 0;
-		io16.channels[i].input_value_cb.value_has_to_change = false;
+//		channel->input_value_cb.period = 0;
+//		channel->input_value_cb.last_value = false;
+//		channel->input_value_cb.period_start = 0;
+//		channel->input_value_cb.value_has_to_change = false;
 
 		// Channel edge count config
-		io16.channels[i].edge_count.last_value = io16.channels[i].value;
-		io16.channels[i].edge_count.debounce_start = system_timer_get_ms();
+		channel->edge_count.last_value = channel->value;
+		channel->edge_count.debounce_start = system_timer_get_ms();
 
 		// Initialised as pull-up input
-		io16.channels[i].init_value = true;
+		channel->init_value = true;
 	}
 
 	// All input value callback
-	io16.all_input_value_cb.period = 0;
-	io16.all_input_value_cb.period_start = 0;
-	io16.all_input_value_cb.value_has_to_change = false;
+//	io16.all_input_value_cb.period = 0;
+//	io16.all_input_value_cb.period_start = 0;
+//	io16.all_input_value_cb.value_has_to_change = false;
 
 	// Input value callback ringbuffer init
 	ringbuffer_init(&io16.input_value_cb_rb, INPUT_VALUE_CB_BUFFER_SIZE, &io16.input_value_cb_buffer[0]);
@@ -99,24 +104,25 @@ void io16_tick(void) {
 
 	// Iterate all channels
 	for(uint8_t i = 0; i < NUMBER_OF_CHANNELS; i++) {
-		if(io16.channels[i].direction == IO16_V2_DIRECTION_IN) {
+		IO_CH_t *channel = &io16.channels[i];
+		if(channel->direction == IO16_V2_DIRECTION_IN) {
 			// Channel is input
 
 			// Update current input channel value
-			(pcal6416a.input_value & (1 << i)) ? (io16.channels[i].value = true) : (io16.channels[i].value = false);
+			channel->value = pcal6416a.input_value & (1 << i);
 
 			// Manage channel specific input value callback
-			if((io16.channels[i].input_value_cb.period > 0)) {
-				if(system_timer_is_time_elapsed_ms(io16.channels[i].input_value_cb.period_start, io16.channels[i].input_value_cb.period)) {
+			if((channel->input_value_cb.period > 0)) {
+				if(system_timer_is_time_elapsed_ms(channel->input_value_cb.period_start, channel->input_value_cb.period)) {
 					// Period expired
 
-					if(io16.channels[i].input_value_cb.value_has_to_change) {
+					if(channel->input_value_cb.value_has_to_change) {
 						// Enqueue callback if value changed otherwise not
-						if(io16.channels[i].value != io16.channels[i].input_value_cb.last_value) {
+						if(channel->value != channel->input_value_cb.last_value) {
 							if(ringbuffer_get_used(&io16.input_value_cb_rb) < INPUT_VALUE_CB_BUFFER_SIZE) {
 								ringbuffer_add(&io16.input_value_cb_rb, i); // Channel
 								ringbuffer_add(&io16.input_value_cb_rb, (uint8_t)true); // Changed
-								ringbuffer_add(&io16.input_value_cb_rb, (uint8_t)io16.channels[i].value); // Value
+								ringbuffer_add(&io16.input_value_cb_rb, (uint8_t)channel->value); // Value
 							}
 						}
 					}
@@ -127,7 +133,7 @@ void io16_tick(void) {
 							ringbuffer_add(&io16.input_value_cb_rb, i);
 
 							// Changed
-							if(io16.channels[i].value != io16.channels[i].input_value_cb.last_value) {
+							if(channel->value != channel->input_value_cb.last_value) {
 								ringbuffer_add(&io16.input_value_cb_rb, (uint8_t)true);
 							}
 							else {
@@ -135,19 +141,19 @@ void io16_tick(void) {
 							}
 
 							// Value
-							ringbuffer_add(&io16.input_value_cb_rb, (uint8_t)io16.channels[i].value);
+							ringbuffer_add(&io16.input_value_cb_rb, (uint8_t)channel->value);
 						}
 					}
 
 					// Update last value
-					io16.channels[i].input_value_cb.last_value = io16.channels[i].value;
-					io16.channels[i].input_value_cb.period_start = system_timer_get_ms();
+					channel->input_value_cb.last_value = channel->value;
+					channel->input_value_cb.period_start = system_timer_get_ms();
 				}
 			}
 
 			// Manage all input value callback
 			if(all_ch_in_period_expired) {
-				if(io16.channels[i].value != io16.all_input_value_cb.last_values[i]) {
+				if(channel->value != io16.all_input_value_cb.last_values[i]) {
 					all_ch_in_value_changed = true;
 
 					if(i < 8) {
@@ -158,7 +164,7 @@ void io16_tick(void) {
 					}
 				}
 
-				if(io16.channels[i].value) {
+				if(channel->value) {
 					if(i < 8) {
 						all_channel_values[0] |= (1 << i);
 					}
@@ -176,47 +182,47 @@ void io16_tick(void) {
 				}
 
 				// Update last value
-				io16.all_input_value_cb.last_values[i] = io16.channels[i].value;
+				io16.all_input_value_cb.last_values[i] = channel->value;
 			}
 
 			// Manage edge count
-			if(system_timer_is_time_elapsed_ms(io16.channels[i].edge_count.debounce_start, io16.channels[i].edge_count.debounce)) {
+			if(system_timer_is_time_elapsed_ms(channel->edge_count.debounce_start, channel->edge_count.debounce)) {
 				// Debounce period expired, update edge count
 
-				if(!io16.channels[i].edge_count.last_value && io16.channels[i].value) {
+				if(!channel->edge_count.last_value && channel->value) {
 					// Rising edge
-					io16.channels[i].edge_count.cnt_edge_rising++;
+					channel->edge_count.cnt_edge_rising++;
 				}
-				else if(io16.channels[i].edge_count.last_value && !io16.channels[i].value) {
+				else if(channel->edge_count.last_value && !channel->value) {
 					// Falling edge
-					io16.channels[i].edge_count.cnt_edge_falling++;
+					channel->edge_count.cnt_edge_falling++;
 				}
 
 				// Update last value
-				io16.channels[i].edge_count.last_value = io16.channels[i].value;
-				io16.channels[i].edge_count.debounce_start = system_timer_get_ms();
+				channel->edge_count.last_value = channel->value;
+				channel->edge_count.debounce_start = system_timer_get_ms();
 			}
 		}
 		else {
 			// Channel is output
 
 			// Manage monoflop
-			if(io16.channels[i].monoflop.time > 0) {
-				if(system_timer_is_time_elapsed_ms(io16.channels[i].monoflop.time_start, io16.channels[i].monoflop.time)) {
+			if(channel->monoflop.time > 0) {
+				if(system_timer_is_time_elapsed_ms(channel->monoflop.time_start, channel->monoflop.time)) {
 					// Monoflop time expired
 
-					io16.channels[i].monoflop.time = 0;
-					io16.channels[i].monoflop.time_start = 0;
-					io16.channels[i].monoflop.time_remaining = 0;
+					channel->monoflop.time = 0;
+					channel->monoflop.time_start = 0;
+					channel->monoflop.time_remaining = 0;
 
-					if(io16.channels[i].value) {
-						io16.channels[i].value = false;
+					if(channel->value) {
+						channel->value = false;
 					}
 					else {
-						io16.channels[i].value = true;
+						channel->value = true;
 					}
 
-					if(io16.channels[i].value) {
+					if(channel->value) {
 						pcal6416a.output_value |= (1 << i);
 					}
 					else {
@@ -228,12 +234,12 @@ void io16_tick(void) {
 						// Channel
 						ringbuffer_add(&io16.monoflop_cb_rb, i);
 						// Value
-						ringbuffer_add(&io16.monoflop_cb_rb, (uint8_t)io16.channels[i].value);
+						ringbuffer_add(&io16.monoflop_cb_rb, (uint8_t)channel->value);
 					}
 				}
 				else {
-					io16.channels[i].monoflop.time_remaining = \
-						io16.channels[i].monoflop.time - (system_timer_get_ms() - io16.channels[i].monoflop.time_start);
+					channel->monoflop.time_remaining = \
+						channel->monoflop.time - (system_timer_get_ms() - channel->monoflop.time_start);
 				}
 			}
 		}
