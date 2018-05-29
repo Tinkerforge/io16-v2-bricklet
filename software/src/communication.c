@@ -34,7 +34,6 @@ BootloaderHandleMessageResponse handle_message(const void *message, void *respon
 		case FID_SET_VALUE: return set_value(message);
 		case FID_GET_VALUE: return get_value(message, response);
 		case FID_SET_SELECTED_VALUE: return set_selected_value(message);
-		case FID_GET_SELECTED_VALUE: return get_selected_value(message, response);
 		case FID_SET_CONFIGURATION: return set_configuration(message);
 		case FID_GET_CONFIGURATION: return get_configuration(message, response);
 		case FID_SET_INPUT_VALUE_CALLBACK_CONFIGURATION: return set_input_value_callback_configuration(message);
@@ -114,20 +113,6 @@ BootloaderHandleMessageResponse set_selected_value(const SetSelectedValue *data)
 	}
 
 	return HANDLE_MESSAGE_RESPONSE_EMPTY;
-}
-
-BootloaderHandleMessageResponse get_selected_value(const GetSelectedValue *data, GetSelectedValue_Response *response) {
-	logd("[+] IO16-V2: get_selected_value()\n\r");
-
-	response->header.length = sizeof(GetSelectedValue_Response);
-
-	if(data->channel > NUMBER_OF_CHANNELS - 1) {
-		return HANDLE_MESSAGE_RESPONSE_INVALID_PARAMETER;
-	}
-
-	response->value = io16.channels[data->channel].value;
-
-	return HANDLE_MESSAGE_RESPONSE_NEW_MESSAGE;
 }
 
 BootloaderHandleMessageResponse set_configuration(const SetConfiguration *data) {

@@ -64,22 +64,21 @@ void communication_init(void);
 #define FID_SET_VALUE 1
 #define FID_GET_VALUE 2
 #define FID_SET_SELECTED_VALUE 3
-#define FID_GET_SELECTED_VALUE 4
-#define FID_SET_CONFIGURATION 5
-#define FID_GET_CONFIGURATION 6
-#define FID_SET_INPUT_VALUE_CALLBACK_CONFIGURATION 7
-#define FID_GET_INPUT_VALUE_CALLBACK_CONFIGURATION 8
-#define FID_SET_ALL_INPUT_VALUE_CALLBACK_CONFIGURATION 9
-#define FID_GET_ALL_INPUT_VALUE_CALLBACK_CONFIGURATION 10
-#define FID_SET_MONOFLOP 11
-#define FID_GET_MONOFLOP 12
-#define FID_GET_EDGE_COUNT 13
-#define FID_SET_EDGE_COUNT_CONFIGURATION 14
-#define FID_GET_EDGE_COUNT_CONFIGURATION 15
+#define FID_SET_CONFIGURATION 4
+#define FID_GET_CONFIGURATION 5
+#define FID_SET_INPUT_VALUE_CALLBACK_CONFIGURATION 6
+#define FID_GET_INPUT_VALUE_CALLBACK_CONFIGURATION 7
+#define FID_SET_ALL_INPUT_VALUE_CALLBACK_CONFIGURATION 8
+#define FID_GET_ALL_INPUT_VALUE_CALLBACK_CONFIGURATION 9
+#define FID_SET_MONOFLOP 10
+#define FID_GET_MONOFLOP 11
+#define FID_GET_EDGE_COUNT 12
+#define FID_SET_EDGE_COUNT_CONFIGURATION 13
+#define FID_GET_EDGE_COUNT_CONFIGURATION 14
 
-#define FID_CALLBACK_INPUT_VALUE 16
-#define FID_CALLBACK_ALL_INPUT_VALUE 17
-#define FID_CALLBACK_MONOFLOP_DONE 18
+#define FID_CALLBACK_INPUT_VALUE 15
+#define FID_CALLBACK_ALL_INPUT_VALUE 16
+#define FID_CALLBACK_MONOFLOP_DONE 17
 
 typedef struct {
 	TFPMessageHeader header;
@@ -100,16 +99,6 @@ typedef struct {
 	uint8_t channel;
 	bool value;
 } __attribute__((__packed__)) SetSelectedValue;
-
-typedef struct {
-	TFPMessageHeader header;
-	uint8_t channel;
-} __attribute__((__packed__)) GetSelectedValue;
-
-typedef struct {
-	TFPMessageHeader header;
-	bool value;
-} __attribute__((__packed__)) GetSelectedValue_Response;
 
 typedef struct {
 	TFPMessageHeader header;
@@ -234,7 +223,6 @@ typedef struct {
 BootloaderHandleMessageResponse set_value(const SetValue *data);
 BootloaderHandleMessageResponse get_value(const GetValue *data, GetValue_Response *response);
 BootloaderHandleMessageResponse set_selected_value(const SetSelectedValue *data);
-BootloaderHandleMessageResponse get_selected_value(const GetSelectedValue *data, GetSelectedValue_Response *response);
 BootloaderHandleMessageResponse set_configuration(const SetConfiguration *data);
 BootloaderHandleMessageResponse get_configuration(const GetConfiguration *data, GetConfiguration_Response *response);
 BootloaderHandleMessageResponse set_input_value_callback_configuration(const SetInputValueCallbackConfiguration *data);
