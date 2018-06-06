@@ -1,4 +1,4 @@
-(kicad_pcb (version 4) (host pcbnew 4.0.7-e2-6376~58~ubuntu17.04.1)
+(kicad_pcb (version 4) (host pcbnew 4.0.7-e2-6376~61~ubuntu18.04.1)
 
   (general
     (links 81)
@@ -24,7 +24,7 @@
 
   (layers
     (0 Vorderseite signal)
-    (31 Rückseite signal)
+    (31 Rückseite signal hide)
     (32 B.Adhes user)
     (33 F.Adhes user)
     (34 B.Paste user)
@@ -74,8 +74,8 @@
     (pad_size 1.2 1.2)
     (pad_drill 1.2)
     (pad_to_mask_clearance 0)
-    (aux_axis_origin 111.5 114.53)
-    (grid_origin 111.5 114.53)
+    (aux_axis_origin 111.5 79.53)
+    (grid_origin 111.5 79.53)
     (visible_elements FFFFFFBF)
     (pcbplotparams
       (layerselection 0x00030_80000001)
@@ -7255,7 +7255,7 @@
   (gr_text GND (at 126.49708 80.62468 180) (layer F.SilkS)
     (effects (font (size 1.00076 1.00076) (thickness 0.14986)))
   )
-  (gr_text IO-16 (at 115.29822 87.92464) (layer F.SilkS)
+  (gr_text "IO-16\n2.0" (at 115.29822 87.92464) (layer F.SilkS)
     (effects (font (size 1.39954 1.39954) (thickness 0.14986)))
   )
 
