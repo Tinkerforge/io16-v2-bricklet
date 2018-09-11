@@ -1,0 +1,35 @@
+Notebook[{
+ Cell[
+  BoxData[{
+   RowBox[{"Needs", "[", "\"\<NETLink`\>\"", "]"}],
+   RowBox[{"LoadNETAssembly", "[", RowBox[{"\"\<Tinkerforge\>\"", ",", RowBox[{RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\<../../..\>\""}]}], "]"}]
+  }], "Input"
+ ],
+ Cell[
+  BoxData[{
+   RowBox[{"host", "=", "\"\<localhost\>\""}],
+   RowBox[{"port", "=", "4223"}],
+   RowBox[{"uid", "=", "\"\<XYZ\>\"", RowBox[{"(*", "Change XYZ to the UID of your IO-16 Bricklet 2.0", "*)"}]}],
+   RowBox[{"
+"}],
+   RowBox[{"(*", "Create IPConnection and device object", "*)"}],
+   RowBox[{"ipcon", "=", RowBox[{"NETNew", "[", "\"\<Tinkerforge.IPConnection\>\"", "]"}]}],
+   RowBox[{"io", "=", RowBox[{"NETNew", "[", RowBox[{"\"\<Tinkerforge.BrickletIO16V2\>\"", ",", "uid", ",", "ipcon"}], "]"}]}],
+   RowBox[{"ipcon", "@", RowBox[{"Connect", "[", RowBox[{"host", ",", "port"}], "]"}]}],
+   RowBox[{"
+"}],
+   RowBox[{"(*", "Configure channel 7 as output low", "*)"}],
+   RowBox[{"io", "@", RowBox[{"SetConfiguration", "[", RowBox[{"7", ",", RowBox[{RowBox[{"ToCharacterCode", "[", "\"\<o\>\"", "]"}], "[", RowBox[{"[", "1", "]"}], "]"}], ",", "False"}], "]"}]}],
+   RowBox[{"
+"}],
+   RowBox[{"(*", "Set channel 7 alternating high/low 10 times with 100 ms delay", "*)"}],
+   RowBox[{"For", "[", RowBox[{RowBox[{"i", "=", "0"}], ",", RowBox[{"i", "<", "10"}], ",", RowBox[{"i", "++"}], ",", RowBox[{"\[IndentingNewLine]", RowBox[{"Pause", "[", "0.1", "]"}], ";", "\[IndentingNewLine]", "io", "@", RowBox[{"SetSelectedValue", "[", RowBox[{"7", ",", "True"}], "]"}], ";", "\[IndentingNewLine]", RowBox[{"Pause", "[", "0.1", "]"}], ";", "\[IndentingNewLine]", "io", "@", RowBox[{"SetSelectedValue", "[", RowBox[{"7", ",", "False"}], "]"}], "\[IndentingNewLine]"}]}], "]"}],
+   RowBox[{"
+"}],
+   RowBox[{"(*", "Clean up", "*)"}],
+   RowBox[{"ipcon", "@", RowBox[{"Disconnect", "[", "]"}]}],
+   RowBox[{"ReleaseNETObject", "[", "io", "]"}],
+   RowBox[{"ReleaseNETObject", "[", "ipcon", "]"}]
+  }], "Input"
+ ]
+}]

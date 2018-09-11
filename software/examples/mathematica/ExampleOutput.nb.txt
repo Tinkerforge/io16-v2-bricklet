@@ -1,0 +1,27 @@
+Needs["NETLink`"]
+LoadNETAssembly["Tinkerforge",NotebookDirectory[]<>"../../.."]
+
+host="localhost"
+port=4223
+uid="XYZ"(*Change XYZ to the UID of your IO-16 Bricklet 2.0*)
+
+(*Create IPConnection and device object*)
+ipcon=NETNew["Tinkerforge.IPConnection"]
+io=NETNew["Tinkerforge.BrickletIO16V2",uid,ipcon]
+ipcon@Connect[host,port]
+
+(*Configure channel 7 as output low*)
+io@SetConfiguration[7,ToCharacterCode["o"][[1]],False]
+
+(*Set channel 7 alternating high/low 10 times with 100 ms delay*)
+For[i=0,i<10,i++,
+ Pause[0.1];
+ io@SetSelectedValue[7,True];
+ Pause[0.1];
+ io@SetSelectedValue[7,False]
+]
+
+(*Clean up*)
+ipcon@Disconnect[]
+ReleaseNETObject[io]
+ReleaseNETObject[ipcon]
