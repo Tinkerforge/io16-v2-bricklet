@@ -6,7 +6,7 @@ Module ExampleInterrupt
     Const PORT As Integer = 4223
     Const UID As String = "XYZ" ' Change XYZ to the UID of your IO-16 Bricklet 2.0
 
-    ' Callback subroutine for input_value callback
+    ' Callback subroutine for input value callback
     Sub InputValueCB(ByVal sender As BrickletIO16V2, ByVal channel As Byte, _
                      ByVal changed As Boolean, ByVal value As Boolean)
         Console.WriteLine("Channel: " + channel.ToString())
@@ -22,10 +22,10 @@ Module ExampleInterrupt
         ipcon.Connect(HOST, PORT) ' Connect to brickd
         ' Don't use device before ipcon is connected
 
-        ' Register input_value callback to subroutine InputValueCB
+        ' Register input value callback to subroutine InputValueCB
         AddHandler io.InputValueCallback, AddressOf InputValueCB
 
-        ' Configure callback for channel 4 with fixed 500ms period
+        ' Set period for input value (channel 4) Z callback to 0.5s (500ms)
         io.SetInputValueCallbackConfiguration(4, 500, False)
 
         Console.WriteLine("Press key to exit")

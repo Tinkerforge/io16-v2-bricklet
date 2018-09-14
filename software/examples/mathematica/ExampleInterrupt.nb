@@ -18,14 +18,14 @@ Notebook[{
    RowBox[{"ipcon", "@", RowBox[{"Connect", "[", RowBox[{"host", ",", "port"}], "]"}]}],
    RowBox[{"
 "}],
-   RowBox[{"(*", "Callback function for input_value callback", "*)"}],
+   RowBox[{"(*", "Callback function for input value callback", "*)"}],
    RowBox[{RowBox[{"InputValueCB", "[", RowBox[{"sender_", ",", "channel_", ",", "changed_", ",", "value_"}], "]"}], ":=", "\[IndentingNewLine]", RowBox[{"Module", "[", RowBox[{RowBox[{"{", "}"}], ",", RowBox[{"\[IndentingNewLine]", RowBox[{"Print", "[", RowBox[{"\"\<Channel: \>\"", "<>", RowBox[{"ToString", "[", "channel", "]"}]}], "]"}], ";", "\[IndentingNewLine]", RowBox[{"Print", "[", RowBox[{"\"\<Changed: \>\"", "<>", RowBox[{"ToString", "[", "changed", "]"}]}], "]"}], ";", "\[IndentingNewLine]", RowBox[{"Print", "[", RowBox[{"\"\<Value: \>\"", "<>", RowBox[{"ToString", "[", "value", "]"}]}], "]"}], "\[IndentingNewLine]"}]}], "]"}]}],
    RowBox[{"
 "}],
    RowBox[{"AddEventHandler", "[", RowBox[{RowBox[{"io", "@", "InputValueCallback"}], ",", "InputValueCB"}], "]"}],
    RowBox[{"
 "}],
-   RowBox[{"(*", "Configure callback for channel 4 with fixed 500ms period", "*)"}],
+   RowBox[{"(*", "Set period for input value (channel 4) callback to 0.5s (500ms)", "*)"}],
    RowBox[{"io", "@", RowBox[{"SetInputValueCallbackConfiguration", "[", RowBox[{"4", ",", "500", ",", "False"}], "]"}]}],
    RowBox[{"
 "}],

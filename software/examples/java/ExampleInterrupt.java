@@ -17,7 +17,7 @@ public class ExampleInterrupt {
 		ipcon.connect(HOST, PORT); // Connect to brickd
 		// Don't use device before ipcon is connected
 
-		// Add input_value listener
+		// Add input value listener
 		io.addInputValueListener(new BrickletIO16V2.InputValueListener() {
 			public void inputValue(int channel, boolean changed, boolean value) {
 				System.out.println("Channel: " + channel);
@@ -27,7 +27,7 @@ public class ExampleInterrupt {
 			}
 		});
 
-		// Configure callback for channel 4 with fixed 500ms period
+		// Set period for input value (channel 4) callback to 0.5s (500ms)
 		io.setInputValueCallbackConfiguration(4, 500, false);
 
 		System.out.println("Press key to exit"); System.in.read();

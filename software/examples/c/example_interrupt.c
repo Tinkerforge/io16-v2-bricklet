@@ -7,7 +7,7 @@
 #define PORT 4223
 #define UID "XYZ" // Change XYZ to the UID of your IO-16 Bricklet 2.0
 
-// Callback function for input_value callback
+// Callback function for input value callback
 void cb_input_value(uint8_t channel, bool changed, bool value, void *user_data) {
 	(void)user_data; // avoid unused parameter warning
 
@@ -33,13 +33,13 @@ int main(void) {
 	}
 	// Don't use device before ipcon is connected
 
-	// Register input_value callback to function cb_input_value
+	// Register input value callback to function cb_input_value
 	io16_v2_register_callback(&io,
 	                          IO16_V2_CALLBACK_INPUT_VALUE,
 	                          (void *)cb_input_value,
 	                          NULL);
 
-	// Configure callback for channel 4 with fixed 500ms period
+	// Set period for input value (channel 4) callback to 0.5s (500ms)
 	io16_v2_set_input_value_callback_configuration(&io, 4, 500, false);
 
 	printf("Press key to exit\n");

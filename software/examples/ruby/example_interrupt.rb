@@ -16,7 +16,7 @@ io = BrickletIO16V2.new UID, ipcon # Create device object
 ipcon.connect HOST, PORT # Connect to brickd
 # Don't use device before ipcon is connected
 
-# Register input_value callback
+# Register input value callback
 io.register_callback(BrickletIO16V2::CALLBACK_INPUT_VALUE) do |channel, changed, value|
   puts "Channel: #{channel}"
   puts "Changed: #{changed}"
@@ -24,7 +24,7 @@ io.register_callback(BrickletIO16V2::CALLBACK_INPUT_VALUE) do |channel, changed,
   puts ''
 end
 
-# Configure callback for channel 4 with fixed 500ms period
+# Set period for input value (channel 4) callback to 0.5s (500ms)
 io.set_input_value_callback_configuration 4, 500, false
 
 puts 'Press key to exit'

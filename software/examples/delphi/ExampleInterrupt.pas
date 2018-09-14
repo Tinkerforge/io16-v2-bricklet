@@ -25,7 +25,7 @@ const
 var
   e: TExample;
 
-{ Callback procedure for input_value callback }
+{ Callback procedure for input value callback }
 procedure TExample.InputValueCB(sender: TBrickletIO16V2; const channel: byte;
                                 const changed: boolean; const value: boolean);
 begin
@@ -47,10 +47,10 @@ begin
   ipcon.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
-  { Register input_value callback to procedure InputValueCB }
+  { Register input value callback to procedure InputValueCB }
   io.OnInputValue := {$ifdef FPC}@{$endif}InputValueCB;
 
-  { Configure callback for channel 4 with fixed 500ms period }
+  { Set period for input value (channel 4) callback to 0.5s (500ms) }
   io.SetInputValueCallbackConfiguration(4, 500, false);
 
   WriteLn('Press key to exit');

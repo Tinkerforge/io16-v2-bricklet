@@ -10,7 +10,7 @@ ipcon=NETNew["Tinkerforge.IPConnection"]
 io=NETNew["Tinkerforge.BrickletIO16V2",uid,ipcon]
 ipcon@Connect[host,port]
 
-(*Callback function for input_value callback*)
+(*Callback function for input value callback*)
 InputValueCB[sender_,channel_,changed_,value_]:=
  Module[{},
   Print["Channel: "<>ToString[channel]];
@@ -20,7 +20,7 @@ InputValueCB[sender_,channel_,changed_,value_]:=
 
 AddEventHandler[io@InputValueCallback,InputValueCB]
 
-(*Configure callback for channel 4 with fixed 500ms period*)
+(*Set period for input value (channel 4) callback to 0.5s (500ms)*)
 io@SetInputValueCallbackConfiguration[4,500,False]
 
 Input["Click OK to exit"]

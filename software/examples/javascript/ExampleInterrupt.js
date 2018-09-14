@@ -16,14 +16,14 @@ ipcon.connect(HOST, PORT,
 
 ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
     function (connectReason) {
-        // Configure callback for channel 4 with fixed 500ms period
+        // Set period for input value (channel 4) callback to 0.5s (500ms)
         io.setInputValueCallbackConfiguration(4, 500, false);
     }
 );
 
-// Register input_value callback
+// Register input value callback
 io.on(Tinkerforge.BrickletIO16V2.CALLBACK_INPUT_VALUE,
-    // Callback function for input_value callback
+    // Callback function for input value callback
     function (channel, changed, value) {
         console.log('Channel: ' + channel);
         console.log('Changed: ' + changed);

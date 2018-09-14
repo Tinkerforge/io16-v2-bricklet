@@ -7,7 +7,7 @@ class Example
 	private static int PORT = 4223;
 	private static string UID = "XYZ"; // Change XYZ to the UID of your IO-16 Bricklet 2.0
 
-	// Callback function for input_value callback
+	// Callback function for input value callback
 	static void InputValueCB(BrickletIO16V2 sender, byte channel, bool changed,
 	                         bool value)
 	{
@@ -25,10 +25,10 @@ class Example
 		ipcon.Connect(HOST, PORT); // Connect to brickd
 		// Don't use device before ipcon is connected
 
-		// Register input_value callback to function InputValueCB
+		// Register input value callback to function InputValueCB
 		io.InputValueCallback += InputValueCB;
 
-		// Configure callback for channel 4 with fixed 500ms period
+		// Set period for input value (channel 4) callback to 0.5s (500ms)
 		io.SetInputValueCallbackConfiguration(4, 500, false);
 
 		Console.WriteLine("Press enter to exit");

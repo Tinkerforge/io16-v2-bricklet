@@ -12,17 +12,17 @@ function matlab_example_interrupt()
     ipcon.connect(HOST, PORT); % Connect to brickd
     % Don't use device before ipcon is connected
 
-    % Register input_value callback to function cb_input_value
+    % Register input value callback to function cb_input_value
     set(io, 'InputValueCallback', @(h, e) cb_input_value(e));
 
-    % Configure callback for channel 4 with fixed 500ms period
+    % Set period for input value (channel 4) callback to 0.5s (500ms)
     io.setInputValueCallbackConfiguration(4, 500, false);
 
     input('Press key to exit\n', 's');
     ipcon.disconnect();
 end
 
-% Callback function for input_value callback
+% Callback function for input value callback
 function cb_input_value(e)
     fprintf('Channel: %i\n', e.channel);
     fprintf('Changed: %i\n', e.changed);
