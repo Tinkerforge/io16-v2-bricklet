@@ -1,35 +1,6 @@
-EESchema Schematic File Version 2
-LIBS:tinkerforge
-LIBS:power
-LIBS:device
-LIBS:transistors
-LIBS:conn
-LIBS:linear
-LIBS:regul
-LIBS:74xx
-LIBS:cmos4000
-LIBS:adc-dac
-LIBS:memory
-LIBS:xilinx
-LIBS:microcontrollers
-LIBS:dsp
-LIBS:microchip
-LIBS:analog_switches
-LIBS:motorola
-LIBS:texas
-LIBS:intel
-LIBS:audio
-LIBS:interface
-LIBS:digital-audio
-LIBS:philips
-LIBS:display
-LIBS:cypress
-LIBS:siliconi
-LIBS:opto
-LIBS:atmel
-LIBS:contrib
-LIBS:valves
-EELAYER 25 0
+EESchema Schematic File Version 4
+LIBS:io16-v2-cache
+EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -46,7 +17,7 @@ $EndDescr
 Text Notes 500  7750 0    40   ~ 0
 Copyright Tinkerforge GmbH 2018.\nThis documentation describes Open Hardware and is licensed under the\nCERN OHL v. 1.1.\nYou may redistribute and modify this documentation under the terms of the\nCERN OHL v.1.1. (http://ohwr.org/cernohl). This documentation is distributed\nWITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF\nMERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A\nPARTICULAR PURPOSE. Please see the CERN OHL v.1.1 for applicable\nconditions\n
 $Comp
-L R_PACK4 RP1
+L tinkerforge:R_PACK4 RP1
 U 1 1 4DBA2061
 P 9200 3100
 F 0 "RP1" H 9200 3550 40  0000 C CNN
@@ -57,7 +28,7 @@ F 3 "" H 9200 3100 60  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L VAA #PWR01
+L power:VAA #PWR01
 U 1 1 4CA9C941
 P 8550 1050
 F 0 "#PWR01" H 8550 1110 30  0001 C CNN
@@ -68,7 +39,7 @@ F 3 "" H 8550 1050 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SS-2P2T-08 SW1
+L tinkerforge:SS-2P2T-08 SW1
 U 1 1 4CA9C248
 P 3700 1150
 F 0 "SW1" H 3700 1350 60  0000 C CNN
@@ -79,7 +50,7 @@ F 3 "" H 3700 1150 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VAA #PWR02
+L power:VAA #PWR02
 U 1 1 4CA9C056
 P 3250 900
 F 0 "#PWR02" H 3250 960 30  0001 C CNN
@@ -90,7 +61,7 @@ F 3 "" H 3250 900 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L AKL_5_2 J6
+L tinkerforge:AKL_5_2 J6
 U 1 1 4C6D3599
 P 7650 3500
 F 0 "J6" H 7750 3500 60  0000 C CNN
@@ -101,7 +72,7 @@ F 3 "" H 7650 3500 60  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L AKL_5_2 J2
+L tinkerforge:AKL_5_2 J2
 U 1 1 4C7BACD6
 P 7650 2700
 F 0 "J2" H 7750 2700 60  0000 C CNN
@@ -112,7 +83,7 @@ F 3 "" H 7650 2700 60  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L AKL_5_2 J13
+L tinkerforge:AKL_5_2 J13
 U 1 1 4C7BACD3
 P 7650 4900
 F 0 "J13" H 7800 4900 60  0000 C CNN
@@ -123,7 +94,7 @@ F 3 "" H 7650 4900 60  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L AKL_5_2 J8
+L tinkerforge:AKL_5_2 J8
 U 1 1 4C6E45DD
 P 7650 3900
 F 0 "J8" H 7750 3900 60  0000 C CNN
@@ -134,7 +105,7 @@ F 3 "" H 7650 3900 60  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L AKL_5_2 J3
+L tinkerforge:AKL_5_2 J3
 U 1 1 4C6E45D8
 P 7650 2900
 F 0 "J3" H 7750 2900 60  0000 C CNN
@@ -145,7 +116,7 @@ F 3 "" H 7650 2900 60  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR03
+L io16-v2-rescue:GND #PWR03
 U 1 1 4C6D36C9
 P 8550 1350
 F 0 "#PWR03" H 8550 1350 30  0001 C CNN
@@ -156,7 +127,7 @@ F 3 "" H 8550 1350 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L AKL_5_2 J1
+L tinkerforge:AKL_5_2 J1
 U 1 1 4C6D36C1
 P 8350 1200
 F 0 "J1" H 8450 1200 60  0000 C CNN
@@ -167,7 +138,7 @@ F 3 "" H 8350 1200 60  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L AKL_5_2 J4
+L tinkerforge:AKL_5_2 J4
 U 1 1 4C6D359B
 P 7650 3100
 F 0 "J4" H 7750 3100 60  0000 C CNN
@@ -178,7 +149,7 @@ F 3 "" H 7650 3100 60  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L AKL_5_2 J5
+L tinkerforge:AKL_5_2 J5
 U 1 1 4C6D359A
 P 7650 3300
 F 0 "J5" H 7750 3300 60  0000 C CNN
@@ -189,7 +160,7 @@ F 3 "" H 7650 3300 60  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L AKL_5_2 J7
+L tinkerforge:AKL_5_2 J7
 U 1 1 4C6D3598
 P 7650 3700
 F 0 "J7" H 7750 3700 60  0000 C CNN
@@ -200,7 +171,7 @@ F 3 "" H 7650 3700 60  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L AKL_5_2 J12
+L tinkerforge:AKL_5_2 J12
 U 1 1 4C6D358D
 P 7650 4700
 F 0 "J12" H 7800 4700 60  0000 C CNN
@@ -211,7 +182,7 @@ F 3 "" H 7650 4700 60  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L AKL_5_2 J11
+L tinkerforge:AKL_5_2 J11
 U 1 1 4C6D358B
 P 7650 4500
 F 0 "J11" H 7800 4500 60  0000 C CNN
@@ -222,7 +193,7 @@ F 3 "" H 7650 4500 60  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L AKL_5_2 J10
+L tinkerforge:AKL_5_2 J10
 U 1 1 4C6D3574
 P 7650 4300
 F 0 "J10" H 7800 4300 60  0000 C CNN
@@ -233,7 +204,7 @@ F 3 "" H 7650 4300 60  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L AKL_5_2 J9
+L tinkerforge:AKL_5_2 J9
 U 1 1 4C6D3565
 P 7650 4100
 F 0 "J9" H 7750 4100 60  0000 C CNN
@@ -244,7 +215,7 @@ F 3 "" H 7650 4100 60  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L C C2
+L tinkerforge:C C2
 U 1 1 4C6CDF49
 P 8950 2350
 F 0 "C2" H 9000 2450 50  0000 L CNN
@@ -259,7 +230,7 @@ SDA
 Text GLabel 9700 3550 2    47   Output ~ 0
 SCL
 $Comp
-L DRILL U7
+L tinkerforge:DRILL U7
 U 1 1 4C693734
 P 11000 6350
 F 0 "U7" H 11050 6400 60  0001 C CNN
@@ -270,7 +241,7 @@ F 3 "" H 11000 6350 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L DRILL U5
+L tinkerforge:DRILL U5
 U 1 1 4C693732
 P 10700 6350
 F 0 "U5" H 10750 6400 60  0001 C CNN
@@ -281,7 +252,7 @@ F 3 "" H 10700 6350 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L DRILL U6
+L tinkerforge:DRILL U6
 U 1 1 4C693730
 P 11000 6150
 F 0 "U6" H 11050 6200 60  0001 C CNN
@@ -292,7 +263,7 @@ F 3 "" H 11000 6150 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L DRILL U4
+L tinkerforge:DRILL U4
 U 1 1 4C693727
 P 10700 6150
 F 0 "U4" H 10750 6200 60  0001 C CNN
@@ -303,7 +274,7 @@ F 3 "" H 10700 6150 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VCC #PWR04
+L power:VCC #PWR04
 U 1 1 4C5FCFB4
 P 3150 6850
 F 0 "#PWR04" H 3150 6950 30  0001 C CNN
@@ -314,7 +285,7 @@ F 3 "" H 3150 6850 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C1
+L tinkerforge:C C1
 U 1 1 4CF78DC3
 P 1850 1200
 F 0 "C1" H 1900 1100 50  0000 L CNN
@@ -325,11 +296,11 @@ F 3 "" H 1850 1200 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PCAL6416A U8
+L tinkerforge:PCAL6416A U8
 U 1 1 5A9EB513
 P 8550 3850
 F 0 "U8" H 8700 5100 60  0000 C CNN
-F 1 "PCAL6416A" V 8850 4750 60  0000 C CNN
+F 1 "PCAL6416APW" V 8850 4750 60  0000 C CNN
 F 2 "kicad-libraries:TSSOP24-44" H 8550 4050 60  0001 C CNN
 F 3 "" H 8550 4050 60  0000 C CNN
 	1    8550 3850
@@ -340,7 +311,7 @@ RESET
 Text GLabel 9700 3950 2    47   Input ~ 0
 INT
 $Comp
-L GND #PWR05
+L io16-v2-rescue:GND #PWR05
 U 1 1 5A9EE588
 P 8550 5100
 F 0 "#PWR05" H 8550 5100 30  0001 C CNN
@@ -351,7 +322,7 @@ F 3 "" H 8550 5100 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR06
+L io16-v2-rescue:GND #PWR06
 U 1 1 5A9EE5D8
 P 9050 5100
 F 0 "#PWR06" H 9050 5100 30  0001 C CNN
@@ -362,7 +333,7 @@ F 3 "" H 9050 5100 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CON-SENSOR2 P1
+L tinkerforge:CON-SENSOR2 P1
 U 1 1 5A9F15AB
 P 1050 1650
 F 0 "P1" H 900 2050 60  0000 C CNN
@@ -373,7 +344,7 @@ F 3 "" H 1150 1500 60  0000 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L C C5
+L tinkerforge:C C5
 U 1 1 5A9F2D3D
 P 2350 1200
 F 0 "C5" H 2400 1100 50  0000 L CNN
@@ -384,7 +355,7 @@ F 3 "" H 2350 1200 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR07
+L io16-v2-rescue:GND #PWR07
 U 1 1 5A9F380B
 P 2350 1500
 F 0 "#PWR07" H 2350 1500 30  0001 C CNN
@@ -395,7 +366,7 @@ F 3 "" H 2350 1500 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR08
+L io16-v2-rescue:GND #PWR08
 U 1 1 5A9F3CAD
 P 1050 2450
 F 0 "#PWR08" H 1050 2450 30  0001 C CNN
@@ -406,7 +377,7 @@ F 3 "" H 1050 2450 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C4
+L tinkerforge:C C4
 U 1 1 5A9F40EB
 P 1650 2200
 F 0 "C4" H 1700 2100 50  0000 L CNN
@@ -417,7 +388,7 @@ F 3 "" H 1650 2200 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR09
+L io16-v2-rescue:GND #PWR09
 U 1 1 5A9F5419
 P 1650 2450
 F 0 "#PWR09" H 1650 2450 30  0001 C CNN
@@ -428,7 +399,7 @@ F 3 "" H 1650 2450 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R_PACK4 RP2
+L tinkerforge:R_PACK4 RP2
 U 1 1 5A9F566C
 P 2100 2000
 F 0 "RP2" H 2100 2450 50  0000 C CNN
@@ -439,7 +410,7 @@ F 3 "" H 2100 2000 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VCC #PWR010
+L power:VCC #PWR010
 U 1 1 5A9F6710
 P 2350 900
 F 0 "#PWR010" H 2350 1000 30  0001 C CNN
@@ -458,7 +429,7 @@ S-MOSI
 Text GLabel 2550 1950 2    47   Input ~ 0
 S-MISO
 $Comp
-L +5V #PWR011
+L tinkerforge:+5V #PWR011
 U 1 1 5A9F9E4D
 P 1400 900
 F 0 "#PWR011" H 1400 750 50  0001 C CNN
@@ -469,7 +440,7 @@ F 3 "" H 1400 900 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L XMC1XXX24 U1
+L tinkerforge:XMC1XXX24 U1
 U 1 1 5A9FEB7B
 P 3750 7200
 F 0 "U1" H 3600 7600 60  0000 C CNN
@@ -480,7 +451,7 @@ F 3 "" H 3900 7950 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L XMC1XXX24 U1
+L tinkerforge:XMC1XXX24 U1
 U 2 1 5A9FEC07
 P 3750 3600
 F 0 "U1" H 3600 4150 60  0000 C CNN
@@ -491,7 +462,7 @@ F 3 "" H 3900 4350 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L XMC1XXX24 U1
+L tinkerforge:XMC1XXX24 U1
 U 3 1 5A9FEC89
 P 3750 4750
 F 0 "U1" H 3600 5000 60  0000 C CNN
@@ -502,7 +473,7 @@ F 3 "" H 3900 5500 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C6
+L tinkerforge:C C6
 U 1 1 5A9FFC59
 P 3150 7150
 F 0 "C6" H 3200 7250 50  0000 L CNN
@@ -513,7 +484,7 @@ F 3 "" H 3150 7150 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR012
+L io16-v2-rescue:GND #PWR012
 U 1 1 5AA00644
 P 3150 7550
 F 0 "#PWR012" H 3150 7550 30  0001 C CNN
@@ -540,7 +511,7 @@ I2C Master/CH1\nP0.6 :USIC0_CH1-DOUT0/DX0C : SDA\nP0.8: USIC0_CH1-SCLKOUT/DX1B :
 Text Notes 1450 4050 0    39   ~ 0
 SPI Slave/CH0\nP0.13 : USIC0_CH0-DX2F : SEL\nP0.14 : USIC0_CH0-DX1A : CLK\nP0.15 : USIC0_CH0-DX0B : MOSI\nP2.0 : USIC0_CH0-DOUT0 : MISO
 $Comp
-L CONN_01X01 P2
+L tinkerforge:CONN_01X01 P2
 U 1 1 5AA08C5E
 P 2750 6150
 F 0 "P2" H 2750 6250 50  0000 C CNN
@@ -555,7 +526,7 @@ NoConn ~ 3400 4800
 NoConn ~ 3400 3450
 NoConn ~ 3400 3250
 $Comp
-L CONN_01X02 P3
+L tinkerforge:CONN_01X02 P3
 U 1 1 5AA0B57C
 P 3000 5900
 F 0 "P3" H 3000 6050 50  0000 C CNN
@@ -566,7 +537,7 @@ F 3 "" H 3000 5900 50  0000 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR013
+L io16-v2-rescue:GND #PWR013
 U 1 1 5AA0B8A6
 P 3250 6000
 F 0 "#PWR013" H 3250 6000 30  0001 C CNN
@@ -577,7 +548,7 @@ F 3 "" H 3250 6000 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R1
+L tinkerforge:R R1
 U 1 1 5AA0BECE
 P 3100 5650
 F 0 "R1" V 3100 5550 50  0000 C CNN
@@ -588,7 +559,7 @@ F 3 "" H 3100 5650 60  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L LED D1
+L tinkerforge:LED D1
 U 1 1 5AA0CE3D
 P 2600 5650
 F 0 "D1" H 2600 5750 50  0000 C CNN
@@ -599,7 +570,7 @@ F 3 "" H 2600 5650 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VCC #PWR014
+L power:VCC #PWR014
 U 1 1 5AA0D558
 P 2350 5600
 F 0 "#PWR014" H 2350 5700 30  0001 C CNN
@@ -617,7 +588,7 @@ NoConn ~ 3950 1050
 NoConn ~ 3950 1150
 NoConn ~ 3950 1250
 $Comp
-L +5V #PWR015
+L tinkerforge:+5V #PWR015
 U 1 1 5AA19EE0
 P 3400 900
 F 0 "#PWR015" H 3400 750 50  0001 C CNN
@@ -628,7 +599,7 @@ F 3 "" H 3400 900 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VCC #PWR016
+L power:VCC #PWR016
 U 1 1 5AA19F54
 P 3100 900
 F 0 "#PWR016" H 3100 1000 30  0001 C CNN
@@ -639,7 +610,7 @@ F 3 "" H 3100 900 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VCC #PWR017
+L power:VCC #PWR017
 U 1 1 5AA200AE
 P 9400 2800
 F 0 "#PWR017" H 9400 2900 30  0001 C CNN
@@ -650,7 +621,7 @@ F 3 "" H 9400 2800 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C3
+L tinkerforge:C C3
 U 1 1 4CA9B65A
 P 8100 2350
 F 0 "C3" H 8150 2250 50  0000 L CNN
@@ -661,7 +632,7 @@ F 3 "" H 8100 2350 60  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L VCC #PWR018
+L power:VCC #PWR018
 U 1 1 5AA26256
 P 8600 2200
 F 0 "#PWR018" H 8600 2300 30  0001 C CNN
@@ -672,7 +643,7 @@ F 3 "" H 8600 2200 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR019
+L io16-v2-rescue:GND #PWR019
 U 1 1 5AA26E57
 P 9200 2500
 F 0 "#PWR019" H 9200 2500 30  0001 C CNN
@@ -683,7 +654,7 @@ F 3 "" H 9200 2500 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VAA #PWR020
+L power:VAA #PWR020
 U 1 1 50E43575
 P 8500 2200
 F 0 "#PWR020" H 8500 2260 30  0001 C CNN
@@ -698,17 +669,17 @@ Wire Wire Line
 Wire Wire Line
 	8550 1350 8550 1250
 Wire Wire Line
-	8950 3850 9700 3850
+	8950 3850 9350 3850
 Wire Wire Line
-	8950 3950 9700 3950
+	8950 3950 9450 3950
 Wire Wire Line
-	8950 3550 9700 3550
+	8950 3550 9550 3550
 Wire Wire Line
-	8950 3450 9700 3450
+	8950 3450 9250 3450
 Wire Wire Line
 	8550 5050 8550 5100
 Wire Wire Line
-	1400 1950 1900 1950
+	1400 1950 1650 1950
 Wire Wire Line
 	1900 1850 1400 1850
 Wire Wire Line
@@ -727,17 +698,17 @@ Wire Wire Line
 Wire Wire Line
 	1600 1550 1600 950 
 Wire Wire Line
-	1600 950  2350 950 
+	1600 950  1850 950 
 Wire Wire Line
-	2350 900  2350 1000
+	2350 900  2350 950 
 Connection ~ 2350 950 
 Wire Wire Line
 	1850 1000 1850 950 
 Connection ~ 1850 950 
 Wire Wire Line
-	1400 1450 2350 1450
+	1400 1450 1850 1450
 Wire Wire Line
-	2350 1400 2350 1500
+	2350 1400 2350 1450
 Connection ~ 2350 1450
 Wire Wire Line
 	1850 1400 1850 1450
@@ -753,12 +724,12 @@ Wire Wire Line
 Wire Wire Line
 	2300 1950 2550 1950
 Wire Wire Line
-	3150 6850 3150 6950
+	3150 6850 3150 6900
 Wire Wire Line
 	3400 6900 3150 6900
 Connection ~ 3150 6900
 Wire Wire Line
-	3150 7350 3150 7550
+	3150 7350 3150 7400
 Wire Wire Line
 	3400 7400 3150 7400
 Connection ~ 3150 7400
@@ -804,7 +775,7 @@ Connection ~ 9550 3550
 Wire Wire Line
 	9250 2900 9250 2850
 Wire Wire Line
-	9250 2850 9550 2850
+	9250 2850 9350 2850
 Wire Wire Line
 	9550 2850 9550 2900
 Wire Wire Line
@@ -817,7 +788,7 @@ Wire Wire Line
 	9400 2800 9400 2850
 Connection ~ 9400 2850
 Wire Wire Line
-	8600 2200 8600 2500
+	8600 2200 8600 2350
 Wire Wire Line
 	8750 2350 8600 2350
 Connection ~ 8600 2350
@@ -912,7 +883,7 @@ Wire Wire Line
 Wire Wire Line
 	8150 4850 8150 4650
 Wire Wire Line
-	8500 2200 8500 2500
+	8500 2200 8500 2350
 Wire Wire Line
 	8500 2350 8300 2350
 Connection ~ 8500 2350
@@ -921,7 +892,7 @@ Wire Wire Line
 Wire Wire Line
 	7850 2350 7850 2500
 $Comp
-L GND #PWR021
+L io16-v2-rescue:GND #PWR021
 U 1 1 5AA6462E
 P 7850 2500
 F 0 "#PWR021" H 7850 2500 30  0001 C CNN
@@ -934,7 +905,7 @@ $EndComp
 Wire Wire Line
 	7850 2750 7900 2750
 Wire Wire Line
-	7900 2750 7900 5100
+	7900 2750 7900 3050
 Wire Wire Line
 	7850 3050 7900 3050
 Connection ~ 7900 3050
@@ -957,7 +928,7 @@ Wire Wire Line
 	7850 4950 7900 4950
 Connection ~ 7900 4950
 $Comp
-L GND #PWR022
+L io16-v2-rescue:GND #PWR022
 U 1 1 5AA69121
 P 7900 5100
 F 0 "#PWR022" H 7900 5100 30  0001 C CNN
@@ -972,7 +943,7 @@ RESET
 Text GLabel 3150 4700 0    47   Input ~ 0
 INT
 $Comp
-L XMC1XXX24 U1
+L tinkerforge:XMC1XXX24 U1
 U 4 1 5A9FED0A
 P 3750 5900
 F 0 "U1" H 3600 6350 60  0000 C CNN
@@ -999,4 +970,52 @@ Wire Wire Line
 NoConn ~ 3400 3150
 Wire Wire Line
 	3400 6150 2950 6150
+Wire Wire Line
+	1650 1950 1900 1950
+Wire Wire Line
+	2350 950  2350 1000
+Wire Wire Line
+	1850 950  2350 950 
+Wire Wire Line
+	2350 1450 2350 1500
+Wire Wire Line
+	1850 1450 2350 1450
+Wire Wire Line
+	3150 6900 3150 6950
+Wire Wire Line
+	3150 7400 3150 7500
+Wire Wire Line
+	3150 7500 3150 7550
+Wire Wire Line
+	9250 3450 9700 3450
+Wire Wire Line
+	9550 3550 9700 3550
+Wire Wire Line
+	9450 2850 9550 2850
+Wire Wire Line
+	9350 2850 9400 2850
+Wire Wire Line
+	9400 2850 9450 2850
+Wire Wire Line
+	8600 2350 8600 2500
+Wire Wire Line
+	9350 3850 9700 3850
+Wire Wire Line
+	9450 3950 9700 3950
+Wire Wire Line
+	8500 2350 8500 2500
+Wire Wire Line
+	7900 3050 7900 3350
+Wire Wire Line
+	7900 3350 7900 3650
+Wire Wire Line
+	7900 3650 7900 3850
+Wire Wire Line
+	7900 3850 7900 4350
+Wire Wire Line
+	7900 4350 7900 4450
+Wire Wire Line
+	7900 4450 7900 4950
+Wire Wire Line
+	7900 4950 7900 5100
 $EndSCHEMATC
