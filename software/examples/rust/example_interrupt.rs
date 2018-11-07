@@ -12,10 +12,10 @@ fn main() -> Result<(), Box<dyn Error>> {
     ipcon.connect((HOST, PORT)).recv()??; // Connect to brickd.
                                           // Don't use device before ipcon is connected.
 
-    // Create receiver for input value events.
-    let input_value_receiver = io.get_input_value_receiver();
+    let input_value_receiver = io.get_input_value_callback_receiver();
 
-    // Spawn thread to handle received events. This thread ends when the `io` object
+    // Spawn thread to handle received callback messages.
+    // This thread ends when the `io` object
     // is dropped, so there is no need for manual cleanup.
     thread::spawn(move || {
         for input_value in input_value_receiver {
