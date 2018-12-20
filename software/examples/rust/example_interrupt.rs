@@ -1,5 +1,8 @@
-use std::{error::Error, io, thread};
-use tinkerforge::{io16_v2_bricklet::*, ip_connection::IpConnection};
+use std::{io, error::Error};
+use std::thread;
+use tinkerforge::{ip_connection::IpConnection, 
+                  io16_v2_bricklet::*};
+
 
 const HOST: &str = "localhost";
 const PORT: u16 = 4223;
@@ -10,24 +13,24 @@ fn main() -> Result<(), Box<dyn Error>> {
     let io = Io16V2Bricklet::new(UID, &ipcon); // Create device object.
 
     ipcon.connect((HOST, PORT)).recv()??; // Connect to brickd.
-                                          // Don't use device before ipcon is connected.
+    // Don't use device before ipcon is connected.
 
-    let input_value_receiver = io.get_input_value_callback_receiver();
+     let input_value_receiver = io.get_input_value_callback_receiver();
 
-    // Spawn thread to handle received callback messages.
-    // This thread ends when the `io` object
-    // is dropped, so there is no need for manual cleanup.
-    thread::spawn(move || {
-        for input_value in input_value_receiver {
-            println!("Channel: {}", input_value.channel);
-            println!("Changed: {}", input_value.changed);
-            println!("Value: {}", input_value.value);
-            println!();
-        }
-    });
+        // Spawn thread to handle received callback messages. 
+        // This thread ends when the `io` object
+        // is dropped, so there is no need for manual cleanup.
+        thread::spawn(move || {
+            for input_value in input_value_receiver {           
+                		println!("Channel: {}", input_value.channel);
+		println!("Changed: {}", input_value.changed);
+		println!("Value: {}", input_value.value);
+		println!();
+            }
+        });
 
-    // Set period for input value (channel 4) callback to 0.5s (500ms).
-    io.set_input_value_callback_configuration(4, 500, false);
+		// Set period for input value (channel 4) callback to 0.5s (500ms).
+		io.set_input_value_callback_configuration(4, 500, false);
 
     println!("Press enter to exit.");
     let mut _input = String::new();
