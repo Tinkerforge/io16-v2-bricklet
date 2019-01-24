@@ -3,10 +3,16 @@
 setup:
 	# Configure channel 7 as output low
 	publish '{"channel": 7, "direction": "out", "value": false}' to tinkerforge/request/io16_v2_bricklet/XYZ/set_configuration 
+	
 	# Set channel 7 alternating high/low 10 times with 100 ms delay
 	for i in 0 1 2 3 4 5 6 7 8 9; do
+	
 		wait for 0.1s 
+	
 		publish '{"channel": 7, "value": true}' to tinkerforge/request/io16_v2_bricklet/XYZ/set_selected_value 
+	
 		wait for 0.1s 
+	
 		publish '{"channel": 7, "value": false}' to tinkerforge/request/io16_v2_bricklet/XYZ/set_selected_value 
+	
 	done

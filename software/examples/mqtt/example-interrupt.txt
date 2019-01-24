@@ -4,5 +4,6 @@ setup:
 	# Handle incoming input value callbacks
 	subscribe to tinkerforge/callback/io16_v2_bricklet/XYZ/input_value
 	publish '{"register": true}' to tinkerforge/register/io16_v2_bricklet/XYZ/input_value # Register input_value callback
+	
 	# Set period for input value (channel 4) callback to 0.5s (500ms)
 	publish '{"channel": 4, "period": 500, "value_has_to_change": false}' to tinkerforge/request/io16_v2_bricklet/XYZ/set_input_value_callback_configuration 
