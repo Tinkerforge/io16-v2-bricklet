@@ -16,7 +16,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     io.set_configuration(7, 'o', false);
 
     // Set channel 7 alternating high/low 10 times with 100 ms delay
-    for i in 0..10 {
+    for _i in 0..10 {
         thread::sleep(Duration::from_millis(100));
         io.set_selected_value(7, true);
         thread::sleep(Duration::from_millis(100));
