@@ -58,6 +58,11 @@ BootloaderHandleMessageResponse set_value(const SetValue *data) {
 			continue;
 		}
 
+		// Reset monoflop
+		io16.channels[i].monoflop.time_start = 0;
+		io16.channels[i].monoflop.time_remaining = 0;
+		io16.channels[i].monoflop.running = false;
+
 		if(data->value & (1 << i)) {
 			io16.channels[i].value = true;
 			pcal6416a.output_value |= (1 << i);
@@ -105,6 +110,11 @@ BootloaderHandleMessageResponse set_selected_value(const SetSelectedValue *data)
 
 	io16.channels[data->channel].value = data->value;
 
+	// Reset monoflop
+	io16.channels[data->channel].monoflop.time_start = 0;
+	io16.channels[data->channel].monoflop.time_remaining = 0;
+	io16.channels[data->channel].monoflop.running = false;
+
 	if(io16.channels[data->channel].value) {
 		pcal6416a.output_value |= (1 << data->channel);
 	}
@@ -147,9 +157,9 @@ BootloaderHandleMessageResponse set_configuration(const SetConfiguration *data) 
 		}
 
 		// Reset monoflop
-		io16.channels[data->channel].monoflop.time = 0;
 		io16.channels[data->channel].monoflop.time_start = 0;
 		io16.channels[data->channel].monoflop.time_remaining = 0;
+		io16.channels[data->channel].monoflop.running = false;
 	}
 	else if(data->direction == IO16_V2_DIRECTION_OUT) {
 		io16.channels[data->channel].init_value = data->value;
@@ -172,9 +182,9 @@ BootloaderHandleMessageResponse set_configuration(const SetConfiguration *data) 
 		io16.channels[data->channel].edge_count.cnt_edge_falling = 0;
 
 		// Reset monoflop
-		io16.channels[data->channel].monoflop.time = 0;
 		io16.channels[data->channel].monoflop.time_start = 0;
 		io16.channels[data->channel].monoflop.time_remaining = 0;
+		io16.channels[data->channel].monoflop.running = false;
 	}
 	else {
 		return HANDLE_MESSAGE_RESPONSE_INVALID_PARAMETER;
@@ -287,6 +297,7 @@ BootloaderHandleMessageResponse set_monoflop(const SetMonoflop *data) {
 	io16.channels[data->channel].value = data->value;
 	io16.channels[data->channel].monoflop.time = data->time;
 	io16.channels[data->channel].monoflop.time_remaining = data->time;
+	io16.channels[data->channel].monoflop.running = true;
 
 	if(io16.channels[data->channel].value) {
 		pcal6416a.output_value |= (1 << data->channel);

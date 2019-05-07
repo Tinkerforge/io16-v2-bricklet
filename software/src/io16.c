@@ -57,6 +57,7 @@ void io16_init(void) {
 //		channel->monoflop.time = 0;
 //		channel->monoflop.time_start = 0;
 //		channel->monoflop.time_remaining = 0;
+//		channel->monoflop.running = false;
 
 		// Channel edge count config
 		channel->edge_count.debounce = 100;
@@ -207,20 +208,14 @@ void io16_tick(void) {
 			// Channel is output
 
 			// Manage monoflop
-			if(channel->monoflop.time > 0) {
+			if(channel->monoflop.running) {
 				if(system_timer_is_time_elapsed_ms(channel->monoflop.time_start, channel->monoflop.time)) {
 					// Monoflop time expired
-
-					channel->monoflop.time = 0;
 					channel->monoflop.time_start = 0;
 					channel->monoflop.time_remaining = 0;
+					channel->monoflop.running = false;
 
-					if(channel->value) {
-						channel->value = false;
-					}
-					else {
-						channel->value = true;
-					}
+					channel->value = !channel->value;
 
 					if(channel->value) {
 						pcal6416a.output_value |= (1 << i);

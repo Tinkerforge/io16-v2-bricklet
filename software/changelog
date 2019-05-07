@@ -1,2 +1,6 @@
 2018-10-04: 2.0.0 (1cff47c)
 - Initial version
+
+2019-05-07: 2.0.1 (<unknown>)
+- Abort active monoflop on set-(selected-)value call
+- Don't clear monoflop time on monoflop done/abort to match documentation
