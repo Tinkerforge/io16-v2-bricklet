@@ -4,3 +4,6 @@
 2019-05-07: 2.0.1 (<unknown>)
 - Abort active monoflop on set-(selected-)value call
 - Don't clear monoflop time on monoflop done/abort to match documentation
+
+2019-05-29: 2.0.2 (TBD)
+- Fix SPITFP IRQ race condition with other higher prio IRQs (through bricklib2)
