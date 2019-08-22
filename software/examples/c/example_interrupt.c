@@ -36,7 +36,7 @@ int main(void) {
 	// Register input value callback to function cb_input_value
 	io16_v2_register_callback(&io,
 	                          IO16_V2_CALLBACK_INPUT_VALUE,
-	                          (void *)cb_input_value,
+	                          (void (*)(void))cb_input_value,
 	                          NULL);
 
 	// Set period for input value (channel 4) callback to 0.5s (500ms)
