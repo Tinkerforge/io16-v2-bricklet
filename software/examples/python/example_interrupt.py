@@ -28,5 +28,5 @@ if __name__ == "__main__":
     # Set period for input value (channel 4) callback to 0.5s (500ms)
     io.set_input_value_callback_configuration(4, 500, False)
 
-    raw_input("Press key to exit\n") # Use input() in Python 3
+    input("Press key to exit\n") # Use raw_input() in Python 2
     ipcon.disconnect()
