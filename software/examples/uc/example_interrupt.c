@@ -1,13 +1,9 @@
-
-
 #include "bindings/hal_common.h"
 #include "bindings/bricklet_io16_v2.h"
 
 #define UID "XYZ" // Change XYZ to the UID of your IO-16 Bricklet 2.0
 
 void check(int rc, const char* msg);
-
-
 
 // Callback function for input value callback
 void input_value_handler(TF_IO16V2 *device, uint8_t channel, bool changed, bool value,
@@ -19,7 +15,6 @@ void input_value_handler(TF_IO16V2 *device, uint8_t channel, bool changed, bool 
 	tf_hal_printf("Value: %s\n", value ? "true" : "false");
 	tf_hal_printf("\n");
 }
-
 
 TF_IO16V2 io;
 
