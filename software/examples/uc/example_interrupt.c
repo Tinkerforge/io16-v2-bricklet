@@ -5,9 +5,13 @@
 
 void check(int rc, const char* msg);
 
+void example_setup(TF_HalContext *hal);
+void example_loop(TF_HalContext *hal);
+
+
 // Callback function for input value callback
-void input_value_handler(TF_IO16V2 *device, uint8_t channel, bool changed, bool value,
-                         void *user_data) {
+static void input_value_handler(TF_IO16V2 *device, uint8_t channel, bool changed,
+                                bool value, void *user_data) {
 	(void)device; (void)user_data; // avoid unused parameter warning
 
 	tf_hal_printf("Channel: %u\n", channel);
@@ -16,7 +20,7 @@ void input_value_handler(TF_IO16V2 *device, uint8_t channel, bool changed, bool 
 	tf_hal_printf("\n");
 }
 
-TF_IO16V2 io;
+static TF_IO16V2 io;
 
 void example_setup(TF_HalContext *hal) {
 	// Create device object
