@@ -14,7 +14,7 @@ static void input_value_handler(TF_IO16V2 *device, uint8_t channel, bool changed
                                 bool value, void *user_data) {
 	(void)device; (void)user_data; // avoid unused parameter warning
 
-	tf_hal_printf("Channel: %u\n", channel);
+	tf_hal_printf("Channel: %I8u\n", channel);
 	tf_hal_printf("Changed: %s\n", changed ? "true" : "false");
 	tf_hal_printf("Value: %s\n", value ? "true" : "false");
 	tf_hal_printf("\n");
