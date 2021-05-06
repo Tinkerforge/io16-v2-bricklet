@@ -17,10 +17,10 @@ public class ExampleOutput {
 		ipcon.connect(HOST, PORT); // Connect to brickd
 		// Don't use device before ipcon is connected
 
-		// Configure channel 7 as output low
+		// Configure channel 7 [A7] as output low
 		io.setConfiguration(7, 'o', false);
 
-		// Set channel 7 alternating high/low 10 times with 100 ms delay
+		// Set channel 7 [A7] alternating high/low 10 times with 100 ms delay
 		for(int i = 0; i < 10; i++) {
 			Thread.sleep(100);
 			io.setSelectedValue(7, true);

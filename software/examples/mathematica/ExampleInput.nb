@@ -1,0 +1,49 @@
+Notebook[{
+ Cell[
+  BoxData[{
+   RowBox[{"Needs", "[", "\"\<NETLink`\>\"", "]"}],
+   RowBox[{"LoadNETAssembly", "[", RowBox[{"\"\<Tinkerforge\>\"", ",", RowBox[{RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\<../../..\>\""}]}], "]"}]
+  }], "Input"
+ ],
+ Cell[
+  BoxData[{
+   RowBox[{"host", "=", "\"\<localhost\>\""}],
+   RowBox[{"port", "=", "4223"}],
+   RowBox[{"uid", "=", "\"\<XYZ\>\"", RowBox[{"(*", "Change XYZ to the UID of your IO-16 Bricklet 2.0", "*)"}]}],
+   RowBox[{"
+"}],
+   RowBox[{"(*", "Create IPConnection and device object", "*)"}],
+   RowBox[{"ipcon", "=", RowBox[{"NETNew", "[", "\"\<Tinkerforge.IPConnection\>\"", "]"}]}],
+   RowBox[{"io", "=", RowBox[{"NETNew", "[", RowBox[{"\"\<Tinkerforge.BrickletIO16V2\>\"", ",", "uid", ",", "ipcon"}], "]"}]}],
+   RowBox[{"ipcon", "@", RowBox[{"Connect", "[", RowBox[{"host", ",", "port"}], "]"}]}],
+   RowBox[{"
+"}],
+   RowBox[{"(*", "Get current value", "*)"}],
+   RowBox[{"value", "=", "io", "@", RowBox[{"GetValue", "[", "]"}]}],
+   RowBox[{"
+"}],
+   RowBox[{"Print", "[", RowBox[{"\"\<Channel 0 [A0]: \>\"", "<>", RowBox[{"ToString", "[", RowBox[{"value", "[", RowBox[{"[", "1", "]"}], "]"}], "]"}]}], "]"}],
+   RowBox[{"Print", "[", RowBox[{"\"\<Channel 1 [A1]: \>\"", "<>", RowBox[{"ToString", "[", RowBox[{"value", "[", RowBox[{"[", "2", "]"}], "]"}], "]"}]}], "]"}],
+   RowBox[{"Print", "[", RowBox[{"\"\<Channel 2 [A2]: \>\"", "<>", RowBox[{"ToString", "[", RowBox[{"value", "[", RowBox[{"[", "3", "]"}], "]"}], "]"}]}], "]"}],
+   RowBox[{"Print", "[", RowBox[{"\"\<Channel 3 [A3]: \>\"", "<>", RowBox[{"ToString", "[", RowBox[{"value", "[", RowBox[{"[", "4", "]"}], "]"}], "]"}]}], "]"}],
+   RowBox[{"Print", "[", RowBox[{"\"\<Channel 4 [A4]: \>\"", "<>", RowBox[{"ToString", "[", RowBox[{"value", "[", RowBox[{"[", "5", "]"}], "]"}], "]"}]}], "]"}],
+   RowBox[{"Print", "[", RowBox[{"\"\<Channel 5 [A5]: \>\"", "<>", RowBox[{"ToString", "[", RowBox[{"value", "[", RowBox[{"[", "6", "]"}], "]"}], "]"}]}], "]"}],
+   RowBox[{"Print", "[", RowBox[{"\"\<Channel 6 [A6]: \>\"", "<>", RowBox[{"ToString", "[", RowBox[{"value", "[", RowBox[{"[", "7", "]"}], "]"}], "]"}]}], "]"}],
+   RowBox[{"Print", "[", RowBox[{"\"\<Channel 7 [A7]: \>\"", "<>", RowBox[{"ToString", "[", RowBox[{"value", "[", RowBox[{"[", "8", "]"}], "]"}], "]"}]}], "]"}],
+   RowBox[{"Print", "[", RowBox[{"\"\<Channel 8 [B0]: \>\"", "<>", RowBox[{"ToString", "[", RowBox[{"value", "[", RowBox[{"[", "9", "]"}], "]"}], "]"}]}], "]"}],
+   RowBox[{"Print", "[", RowBox[{"\"\<Channel 9 [B1]: \>\"", "<>", RowBox[{"ToString", "[", RowBox[{"value", "[", RowBox[{"[", "10", "]"}], "]"}], "]"}]}], "]"}],
+   RowBox[{"Print", "[", RowBox[{"\"\<Channel 10 [B2]: \>\"", "<>", RowBox[{"ToString", "[", RowBox[{"value", "[", RowBox[{"[", "11", "]"}], "]"}], "]"}]}], "]"}],
+   RowBox[{"Print", "[", RowBox[{"\"\<Channel 11 [B3]: \>\"", "<>", RowBox[{"ToString", "[", RowBox[{"value", "[", RowBox[{"[", "12", "]"}], "]"}], "]"}]}], "]"}],
+   RowBox[{"Print", "[", RowBox[{"\"\<Channel 12 [B4]: \>\"", "<>", RowBox[{"ToString", "[", RowBox[{"value", "[", RowBox[{"[", "13", "]"}], "]"}], "]"}]}], "]"}],
+   RowBox[{"Print", "[", RowBox[{"\"\<Channel 13 [B5]: \>\"", "<>", RowBox[{"ToString", "[", RowBox[{"value", "[", RowBox[{"[", "14", "]"}], "]"}], "]"}]}], "]"}],
+   RowBox[{"Print", "[", RowBox[{"\"\<Channel 14 [B6]: \>\"", "<>", RowBox[{"ToString", "[", RowBox[{"value", "[", RowBox[{"[", "15", "]"}], "]"}], "]"}]}], "]"}],
+   RowBox[{"Print", "[", RowBox[{"\"\<Channel 15 [B7]: \>\"", "<>", RowBox[{"ToString", "[", RowBox[{"value", "[", RowBox[{"[", "16", "]"}], "]"}], "]"}]}], "]"}],
+   RowBox[{"
+"}],
+   RowBox[{"(*", "Clean up", "*)"}],
+   RowBox[{"ipcon", "@", RowBox[{"Disconnect", "[", "]"}]}],
+   RowBox[{"ReleaseNETObject", "[", "io", "]"}],
+   RowBox[{"ReleaseNETObject", "[", "ipcon", "]"}]
+  }], "Input"
+ ]
+}]

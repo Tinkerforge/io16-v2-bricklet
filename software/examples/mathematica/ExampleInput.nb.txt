@@ -1,0 +1,36 @@
+Needs["NETLink`"]
+LoadNETAssembly["Tinkerforge",NotebookDirectory[]<>"../../.."]
+
+host="localhost"
+port=4223
+uid="XYZ"(*Change XYZ to the UID of your IO-16 Bricklet 2.0*)
+
+(*Create IPConnection and device object*)
+ipcon=NETNew["Tinkerforge.IPConnection"]
+io=NETNew["Tinkerforge.BrickletIO16V2",uid,ipcon]
+ipcon@Connect[host,port]
+
+(*Get current value*)
+value=io@GetValue[]
+
+Print["Channel 0 [A0]: "<>ToString[value[[1]]]]
+Print["Channel 1 [A1]: "<>ToString[value[[2]]]]
+Print["Channel 2 [A2]: "<>ToString[value[[3]]]]
+Print["Channel 3 [A3]: "<>ToString[value[[4]]]]
+Print["Channel 4 [A4]: "<>ToString[value[[5]]]]
+Print["Channel 5 [A5]: "<>ToString[value[[6]]]]
+Print["Channel 6 [A6]: "<>ToString[value[[7]]]]
+Print["Channel 7 [A7]: "<>ToString[value[[8]]]]
+Print["Channel 8 [B0]: "<>ToString[value[[9]]]]
+Print["Channel 9 [B1]: "<>ToString[value[[10]]]]
+Print["Channel 10 [B2]: "<>ToString[value[[11]]]]
+Print["Channel 11 [B3]: "<>ToString[value[[12]]]]
+Print["Channel 12 [B4]: "<>ToString[value[[13]]]]
+Print["Channel 13 [B5]: "<>ToString[value[[14]]]]
+Print["Channel 14 [B6]: "<>ToString[value[[15]]]]
+Print["Channel 15 [B7]: "<>ToString[value[[16]]]]
+
+(*Clean up*)
+ipcon@Disconnect[]
+ReleaseNETObject[io]
+ReleaseNETObject[ipcon]

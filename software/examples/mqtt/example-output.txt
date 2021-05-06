@@ -1,10 +1,10 @@
 # Change XYZ to the UID of your IO-16 Bricklet 2.0
 
 setup:
-	# Configure channel 7 as output low
+	# Configure channel 7 [A7] as output low
 	publish '{"channel": 7, "direction": "out", "value": false}' to tinkerforge/request/io16_v2_bricklet/XYZ/set_configuration
 
-	# Set channel 7 alternating high/low 10 times with 100 ms delay
+	# Set channel 7 [A7] alternating high/low 10 times with 100 ms delay
 	for i in 0..9
 
 		wait for 0.1s

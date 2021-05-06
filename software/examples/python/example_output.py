@@ -17,10 +17,10 @@ if __name__ == "__main__":
     ipcon.connect(HOST, PORT) # Connect to brickd
     # Don't use device before ipcon is connected
 
-    # Configure channel 7 as output low
+    # Configure channel 7 [A7] as output low
     io.set_configuration(7, "o", False)
 
-    # Set channel 7 alternating high/low 10 times with 100 ms delay
+    # Set channel 7 [A7] alternating high/low 10 times with 100 ms delay
     for i in range(10):
         time.sleep(0.1)
         io.set_selected_value(7, True)

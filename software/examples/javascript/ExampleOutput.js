@@ -16,10 +16,10 @@ ipcon.connect(HOST, PORT,
 
 ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
     function (connectReason) {
-        // Configure channel 7 as output low
+        // Configure channel 7 [A7] as output low
         io.setConfiguration(7, 'o', false);
 
-        // Set channel 7 alternating high/low 10 times with 100 ms delay
+        // Set channel 7 [A7] alternating high/low 10 times with 100 ms delay
         for(var i = 0; i < 10; ++i) {
             setTimeout(function () {
                 io.setSelectedValue(7, true);

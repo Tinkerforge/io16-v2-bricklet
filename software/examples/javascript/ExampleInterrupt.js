@@ -16,7 +16,7 @@ ipcon.connect(HOST, PORT,
 
 ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
     function (connectReason) {
-        // Set period for input value (channel 4) callback to 0.5s (500ms)
+        // Set period for input value (channel 4 [A4]) callback to 0.5s (500ms)
         io.setInputValueCallbackConfiguration(4, 500, false);
     }
 );

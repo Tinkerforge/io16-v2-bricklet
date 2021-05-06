@@ -25,7 +25,7 @@ if __name__ == "__main__":
     # Register input value callback to function cb_input_value
     io.register_callback(io.CALLBACK_INPUT_VALUE, cb_input_value)
 
-    # Set period for input value (channel 4) callback to 0.5s (500ms)
+    # Set period for input value (channel 4 [A4]) callback to 0.5s (500ms)
     io.set_input_value_callback_configuration(4, 500, False)
 
     input("Press key to exit\n") # Use raw_input() in Python 2

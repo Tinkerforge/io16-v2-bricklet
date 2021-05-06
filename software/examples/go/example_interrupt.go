@@ -25,7 +25,7 @@ func main() {
 		fmt.Println()
 	})
 
-	// Set period for input value (channel 4) callback to 0.5s (500ms).
+	// Set period for input value (channel 4 [A4]) callback to 0.5s (500ms).
 	io.SetInputValueCallbackConfiguration(4, 500, false)
 
 	fmt.Print("Press enter to exit.")

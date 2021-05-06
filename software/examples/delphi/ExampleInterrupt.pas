@@ -50,7 +50,7 @@ begin
   { Register input value callback to procedure InputValueCB }
   io.OnInputValue := {$ifdef FPC}@{$endif}InputValueCB;
 
-  { Set period for input value (channel 4) callback to 0.5s (500ms) }
+  { Set period for input value (channel 4 [A4]) callback to 0.5s (500ms) }
   io.SetInputValueCallbackConfiguration(4, 500, false);
 
   WriteLn('Press key to exit');

@@ -27,7 +27,7 @@ public class ExampleInterrupt {
 			}
 		});
 
-		// Set period for input value (channel 4) callback to 0.5s (500ms)
+		// Set period for input value (channel 4 [A4]) callback to 0.5s (500ms)
 		io.setInputValueCallbackConfiguration(4, 500, false);
 
 		System.out.println("Press key to exit"); System.in.read();

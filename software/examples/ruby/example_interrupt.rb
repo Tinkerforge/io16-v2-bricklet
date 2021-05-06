@@ -24,7 +24,7 @@ io.register_callback(BrickletIO16V2::CALLBACK_INPUT_VALUE) do |channel, changed,
   puts ''
 end
 
-# Set period for input value (channel 4) callback to 0.5s (500ms)
+# Set period for input value (channel 4 [A4]) callback to 0.5s (500ms)
 io.set_input_value_callback_configuration 4, 500, false
 
 puts 'Press key to exit'

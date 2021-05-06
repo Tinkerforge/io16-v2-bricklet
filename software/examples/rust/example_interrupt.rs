@@ -26,7 +26,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         }
     });
 
-    // Set period for input value (channel 4) callback to 0.5s (500ms).
+    // Set period for input value (channel 4 [A4]) callback to 0.5s (500ms).
     io.set_input_value_callback_configuration(4, 500, false);
 
     println!("Press enter to exit.");

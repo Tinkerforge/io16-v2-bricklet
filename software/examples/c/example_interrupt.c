@@ -39,7 +39,7 @@ int main(void) {
 	                          (void (*)(void))cb_input_value,
 	                          NULL);
 
-	// Set period for input value (channel 4) callback to 0.5s (500ms)
+	// Set period for input value (channel 4 [A4]) callback to 0.5s (500ms)
 	io16_v2_set_input_value_callback_configuration(&io, 4, 500, false);
 
 	printf("Press key to exit\n");

@@ -1,0 +1,6 @@
+# Change XYZ to the UID of your IO-16 Bricklet 2.0
+
+setup:
+	# Get current value
+	subscribe to tinkerforge/response/io16_v2_bricklet/XYZ/get_value
+	publish '' to tinkerforge/request/io16_v2_bricklet/XYZ/get_value

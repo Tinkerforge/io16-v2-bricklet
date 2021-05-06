@@ -36,10 +36,10 @@ begin
   ipcon.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
-  { Configure channel 7 as output low }
+  { Configure channel 7 [A7] as output low }
   io.SetConfiguration(7, 'o', false);
 
-  { Set channel 7 alternating high/low 10 times with 100 ms delay }
+  { Set channel 7 [A7] alternating high/low 10 times with 100 ms delay }
   for i := 0 to 9 do begin
     Sleep(100);
     io.SetSelectedValue(7, true);

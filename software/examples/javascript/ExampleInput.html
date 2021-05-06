@@ -6,7 +6,7 @@
     </head>
     <body>
         <div style="text-align:center;">
-            <h1>IO-16 Bricklet 2.0 Interrupt Example</h1>
+            <h1>IO-16 Bricklet 2.0 Input Example</h1>
             <p>
                 <input value="localhost" id="host" type="text" size="20">:
                 <input value="4280" id="port" type="text" size="5">,
@@ -41,20 +41,30 @@
 
                 ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
                     function (connectReason) {
-                        // Set period for input value (channel 4 [A4]) callback to 0.5s (500ms)
-                        io.setInputValueCallbackConfiguration(4, 500, false);
-                    }
-                );
-
-                // Register input value callback
-                io.on(Tinkerforge.BrickletIO16V2.CALLBACK_INPUT_VALUE,
-                    // Callback function for input value callback
-                    function (channel, changed, value) {
-                        textArea.value += 'Channel: ' + channel + '\n';
-                        textArea.value += 'Changed: ' + changed + '\n';
-                        textArea.value += 'Value: ' + value + '\n';
-                        textArea.value += '\n';
-                        textArea.scrollTop = textArea.scrollHeight;
+                        // Get current value
+                        io.getValue(
+                            function (value) {
+                                textArea.value += 'Channel 0 [A0]: ' + value[0] + '\n';
+                                textArea.value += 'Channel 1 [A1]: ' + value[1] + '\n';
+                                textArea.value += 'Channel 2 [A2]: ' + value[2] + '\n';
+                                textArea.value += 'Channel 3 [A3]: ' + value[3] + '\n';
+                                textArea.value += 'Channel 4 [A4]: ' + value[4] + '\n';
+                                textArea.value += 'Channel 5 [A5]: ' + value[5] + '\n';
+                                textArea.value += 'Channel 6 [A6]: ' + value[6] + '\n';
+                                textArea.value += 'Channel 7 [A7]: ' + value[7] + '\n';
+                                textArea.value += 'Channel 8 [B0]: ' + value[8] + '\n';
+                                textArea.value += 'Channel 9 [B1]: ' + value[9] + '\n';
+                                textArea.value += 'Channel 10 [B2]: ' + value[10] + '\n';
+                                textArea.value += 'Channel 11 [B3]: ' + value[11] + '\n';
+                                textArea.value += 'Channel 12 [B4]: ' + value[12] + '\n';
+                                textArea.value += 'Channel 13 [B5]: ' + value[13] + '\n';
+                                textArea.value += 'Channel 14 [B6]: ' + value[14] + '\n';
+                                textArea.value += 'Channel 15 [B7]: ' + value[15] + '\n';
+                            },
+                            function (error) {
+                                textArea.value += 'Error: ' + error + '\n';
+                            }
+                        );
                     }
                 );
             }

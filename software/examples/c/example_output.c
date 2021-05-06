@@ -25,10 +25,10 @@ int main(void) {
 	}
 	// Don't use device before ipcon is connected
 
-	// Configure channel 7 as output low
+	// Configure channel 7 [A7] as output low
 	io16_v2_set_configuration(&io, 7, 'o', false);
 
-	// Set channel 7 alternating high/low 10 times with 100 ms delay
+	// Set channel 7 [A7] alternating high/low 10 times with 100 ms delay
 	int i;
 	for(i = 0; i < 10; ++i) {
 		millisleep(100);

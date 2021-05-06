@@ -12,10 +12,10 @@ fn main() -> Result<(), Box<dyn Error>> {
     ipcon.connect((HOST, PORT)).recv()??; // Connect to brickd.
                                           // Don't use device before ipcon is connected.
 
-    // Configure channel 7 as output low
+    // Configure channel 7 [A7] as output low
     io.set_configuration(7, 'o', false).recv()?;
 
-    // Set channel 7 alternating high/low 10 times with 100 ms delay
+    // Set channel 7 [A7] alternating high/low 10 times with 100 ms delay
     for _i in 0..10 {
         thread::sleep(Duration::from_millis(100));
         io.set_selected_value(7, true).recv()?;

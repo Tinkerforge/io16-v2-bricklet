@@ -28,7 +28,7 @@ $ipcon->connect(HOST, PORT); // Connect to brickd
 // Register input value callback to function cb_inputValue
 $io->registerCallback(BrickletIO16V2::CALLBACK_INPUT_VALUE, 'cb_inputValue');
 
-// Set period for input value (channel 4) callback to 0.5s (500ms)
+// Set period for input value (channel 4 [A4]) callback to 0.5s (500ms)
 $io->setInputValueCallbackConfiguration(4, 500, FALSE);
 
 echo "Press ctrl+c to exit\n";

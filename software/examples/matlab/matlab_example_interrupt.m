@@ -15,7 +15,7 @@ function matlab_example_interrupt()
     % Register input value callback to function cb_input_value
     set(io, 'InputValueCallback', @(h, e) cb_input_value(e));
 
-    % Set period for input value (channel 4) callback to 0.5s (500ms)
+    % Set period for input value (channel 4 [A4]) callback to 0.5s (500ms)
     io.setInputValueCallbackConfiguration(4, 500, false);
 
     input('Press key to exit\n', 's');

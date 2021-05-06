@@ -14,7 +14,7 @@ function octave_example_interrupt()
     % Register input value callback to function cb_input_value
     io.addInputValueCallback(@cb_input_value);
 
-    % Set period for input value (channel 4) callback to 0.5s (500ms)
+    % Set period for input value (channel 4 [A4]) callback to 0.5s (500ms)
     io.setInputValueCallbackConfiguration(4, 500, false);
 
     input("Press key to exit\n", "s");

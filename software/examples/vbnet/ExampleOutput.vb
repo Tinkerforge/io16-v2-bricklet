@@ -14,10 +14,10 @@ Module ExampleOutput
         ipcon.Connect(HOST, PORT) ' Connect to brickd
         ' Don't use device before ipcon is connected
 
-        ' Configure channel 7 as output low
+        ' Configure channel 7 [A7] as output low
         io.SetConfiguration(7, "o"C, False)
 
-        ' Set channel 7 alternating high/low 10 times with 100 ms delay
+        ' Set channel 7 [A7] alternating high/low 10 times with 100 ms delay
         Dim i As Integer
         For i = 0 To 9
             Thread.Sleep(100)

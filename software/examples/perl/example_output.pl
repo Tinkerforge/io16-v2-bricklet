@@ -14,10 +14,10 @@ my $io = Tinkerforge::BrickletIO16V2->new(&UID, $ipcon); # Create device object
 $ipcon->connect(&HOST, &PORT); # Connect to brickd
 # Don't use device before ipcon is connected
 
-# Configure channel 7 as output low
+# Configure channel 7 [A7] as output low
 $io->set_configuration(7, 'o', 0);
 
-# Set channel 7 alternating high/low 10 times with 100 ms delay
+# Set channel 7 [A7] alternating high/low 10 times with 100 ms delay
 for (my $i = 0; $i < 10; $i++)
 {
     select(undef, undef, undef, 0.1);

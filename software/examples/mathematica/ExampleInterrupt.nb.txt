@@ -20,7 +20,7 @@ InputValueCB[sender_,channel_,changed_,value_]:=
 
 AddEventHandler[io@InputValueCallback,InputValueCB]
 
-(*Set period for input value (channel 4) callback to 0.5s (500ms)*)
+(*Set period for input value (channel 4 [A4]) callback to 0.5s (500ms)*)
 io@SetInputValueCallbackConfiguration[4,500,False]
 
 Input["Click OK to exit"]
