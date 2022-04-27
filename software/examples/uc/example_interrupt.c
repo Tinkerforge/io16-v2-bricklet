@@ -1,17 +1,13 @@
 // This example is not self-contained.
-// It requres usage of the example driver specific to your platform.
+// It requires usage of the example driver specific to your platform.
 // See the HAL documentation.
 
-#include "bindings/hal_common.h"
-#include "bindings/bricklet_io16_v2.h"
+#include "src/bindings/hal_common.h"
+#include "src/bindings/bricklet_io16_v2.h"
 
-#define UID "XYZ" // Change XYZ to the UID of your IO-16 Bricklet 2.0
-
-void check(int rc, const char* msg);
-
+void check(int rc, const char *msg);
 void example_setup(TF_HAL *hal);
 void example_loop(TF_HAL *hal);
-
 
 // Callback function for input value callback
 static void input_value_handler(TF_IO16V2 *device, uint8_t channel, bool changed,
@@ -28,7 +24,7 @@ static TF_IO16V2 io;
 
 void example_setup(TF_HAL *hal) {
 	// Create device object
-	check(tf_io16_v2_create(&io, UID, hal), "create device object");
+	check(tf_io16_v2_create(&io, NULL, hal), "create device object");
 
 	// Register input value callback to function input_value_handler
 	tf_io16_v2_register_input_value_callback(&io,
